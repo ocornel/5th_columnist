@@ -55,4 +55,8 @@ class User extends Authenticatable
         }
         return "Unassigned.";
     }
+
+    public function getMetasAttribute() {
+        return UserMeta::where('user_id', $this->id)->get();
+    }
 }
