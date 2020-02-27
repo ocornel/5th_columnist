@@ -3,6 +3,11 @@ name        key
 value       variable value
 default     used on reset
 
+ROLES >> Users are grouped into roles
+name                The name of the role
+description         Brief details about the role, what the role can do
+status              Roles can be deactivated meaning users of the role may not login.
+
 USERS >> Users of the system
 name
 email
@@ -11,11 +16,7 @@ password            encrypted password
 username            Allows for changing passwords. Login with username
 url                 External URL example website or facebook page
 display_name        How the user prefers to show off their name otherwise full name or username as applicable
-
-ROLES >> Users are grouped into roles
-name                The name of the role
-description         Brief details about the role, what the role can do
-status              Roles can be deactivated meaning users of the role may not login.
+role_id
 
 ACTIONS >> These are what can be done
 name                The name of the privilege example create_article
@@ -30,6 +31,11 @@ meta_name
 meta_value
 user_id
 
+CATEGORY >> Posts are grouped into categories and subcategories
+name
+description
+status              Categories when deactivated, links to the categories or articles of the category cannot be opened
+
 POST >> An article created
 user_id             The author of the post
 publish_date        The time to make the post status published
@@ -41,6 +47,10 @@ password            To restrict access to the post
 name                For the url
 comment_count       Every time a comment is made on a post, increment
 view_count          Every time a post is opened, increment
+likes
+dislikes
+rating
+category_id
 
 POST_META >> Stores information about the post
 meta_name
@@ -48,6 +58,15 @@ meta_value
 post_id
 
 COMMENT >> Stores comments people make on posts
+post_id
+content
+user_id
+likes
+dislikes
+rating
+status          draft, approved, deleted
+parent_id
+
 COMMENT_META >> Additional information about the comment made
 meta_name
 meta_value
@@ -59,11 +78,6 @@ user_id
 content
 name                For the URL
 view_count
-
-CATEGORY >> Posts are grouped into categories and subcategories
-name
-description
-status              Categories when deactivated, links to the categories or articles of the category cannot be opened
 
 TAGS
 name
