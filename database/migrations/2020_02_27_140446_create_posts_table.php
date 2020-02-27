@@ -15,7 +15,24 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
+            $table->dateTime('publish_date')->default(now());
+            $table->enum('status', [\App\Post::STATUS_DRAFT, \App\Post::STATUS_PUBLISHED, \App\Post::STATUS_DELETED])->default(\App\Post::STATUS_DRAFT);
+            $table->text('content')->nullable();
+            $table->string('title');
+            $table->enum('comment_status',[\App\Post::COMMENTS_ENABLED, \App\Post::COMMENTS_DISABLED])->default(\App\Post::COMMENTS_ENABLED);
+            $table->string('password')->nullable();
+            $table->string('name')->default(\App\Post::generateName());
+            $table->bigInteger('comment_count')->default(0);
+            $table->bigInteger('view_count')->default(0);
+            $table->bigInteger('likes');
+            $table->bigInteger('dislikes');
+            $table->float('rating')->default(0.0);
+            $table->unsignedBigInteger('category_id');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

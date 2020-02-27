@@ -22,7 +22,7 @@ class Category extends Model
         return true;
     }
 
-    public function resoveViewCount() {
+    public function resolveViewCount() {
         $view_count = 0;
         $posts = $this->posts;
         foreach ($posts as $post) {
