@@ -36,4 +36,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function generateUserName() {
+        $uname = Utils::random_string(7,'l');
+        if (User::where('username', $uname)->count() > 0) {
+            self::generateUserName();
+        }
+        return $uname;
+    }
 }
