@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'username', 'url', 'display_name', 'role_id'
     ];
 
     /**
@@ -43,5 +43,16 @@ class User extends Authenticatable
             self::generateUserName();
         }
         return $uname;
+    }
+
+    public function getRoleAttribute() {
+        return Role::find($this->role_id);
+    }
+
+    public function getRoleNameAttribute() {
+        if($role = $this->role) {
+            return $role->name;
+        }
+        return "Unassigned.";
     }
 }

@@ -15,7 +15,12 @@ class CreateActionRolesTable extends Migration
     {
         Schema::create('action_roles', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('action_id');
+            $table->unsignedBigInteger('role_id');
             $table->timestamps();
+
+            $table->foreign('action_id')->references('id')->on('actions');
+            $table->foreign('role_id')->references('id')->on('roles');
         });
     }
 
