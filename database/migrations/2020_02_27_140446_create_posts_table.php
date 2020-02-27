@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->dateTime('publish_date')->default(now());
-            $table->enum('status', [\App\Post::STATUS_DRAFT, \App\Post::STATUS_PUBLISHED, \App\Post::STATUS_DELETED])->default(\App\Post::STATUS_DRAFT);
+            $table->enum('status', [\App\Post::STATUS_DRAFT, \App\Post::STATUS_PUBLISHED, \App\Post::STATUS_DELETED])->default(\App\Post::defaultPostStatus());
             $table->text('content')->nullable();
             $table->string('title');
             $table->enum('comment_status',[\App\Post::COMMENTS_ENABLED, \App\Post::COMMENTS_DISABLED])->default(\App\Post::COMMENTS_ENABLED);

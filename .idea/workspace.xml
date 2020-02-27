@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bc643af1-b12c-455f-9268-43757fb72904" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/Option.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Option.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_27_000000_create_roles_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_27_000000_create_roles_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_27_140316_create_options_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_27_140316_create_options_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Comment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/PostMeta.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/PostMeta.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_27_140446_create_posts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_27_140446_create_posts_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_27_140453_create_post_metas_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_27_140453_create_post_metas_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_27_140501_create_comments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_27_140501_create_comments_table.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,13 +176,17 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="439" y="260" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1582809959239" />
+    <state width="570" height="445" key="SwitcherDM" timestamp="1582818111605">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="570" height="445" key="SwitcherDM/0.0.1440.900@0.0.1440.900" timestamp="1582818111605" />
     <state x="397" y="282" key="com.intellij.ide.util.TipDialog" timestamp="1582652849995">
       <screen x="0" y="23" width="1440" height="852" />
     </state>
     <state x="397" y="282" key="com.intellij.ide.util.TipDialog/0.23.1440.852@0.23.1440.852" timestamp="1582652849995" />
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1582812675590">
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1582819012443">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1582812675590" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1582819012443" />
   </component>
 </project>

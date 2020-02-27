@@ -15,7 +15,12 @@ class CreatePostMetasTable extends Migration
     {
         Schema::create('post_metas', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('meta_name');
+            $table->text('meta_value');
+            $table->unsignedBigInteger('post_id');
             $table->timestamps();
+
+            $table->foreign('post_id')->references('id')->on('posts');
         });
     }
 

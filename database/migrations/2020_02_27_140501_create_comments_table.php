@@ -15,7 +15,18 @@ class CreateCommentsTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('post_id');
+            $table->text('content');
+            $table->unsignedBigInteger('user_id');
+            $table->bigInteger('likes')->default(0);
+            $table->bigInteger('dislikes')->default(0);
+            $table->float('rating')->default(0.0);
+            $table->enum('status', [\App\Comment::STATUS_DRAFT, \App\Comment::STATUS_APPROVED, \App\Comment::STATUS_DELETED])->default(\App\Comment::defaultCommentStatus());
+            $table->unsignedBigInteger('parent_id');
             $table->timestamps();
+
+            $table->foreign('post_id')->references('id')->on('posts');
+            $table->foreign('parent_id')->references('id')->on('comments');
         });
     }
 
