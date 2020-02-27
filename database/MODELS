@@ -1,0 +1,81 @@
+OPTIONS >> For storing the option values ie settings
+name        key
+value       variable value
+default     used on reset
+
+USERS >> Users of the system
+name
+email
+email_verified_at   If null, account isn't verified yet
+password            encrypted password
+username            Allows for changing passwords. Login with username
+url                 External URL example website or facebook page
+display_name        How the user prefers to show off their name otherwise full name or username as applicable
+
+ROLES >> Users are grouped into roles
+name                The name of the role
+description         Brief details about the role, what the role can do
+status              Roles can be deactivated meaning users of the role may not login.
+
+ACTIONS >> These are what can be done
+name                The name of the privilege example create_article
+description         The description to help users understand example. Users in this role can create articles
+
+ACTION_ROLE >> Relates the actions to roles many to many
+action_id
+role_id
+
+USER_META >> Stores information about a user
+meta_name
+meta_value
+user_id
+
+POST >> An article created
+user_id             The author of the post
+publish_date        The time to make the post status published
+status              Post can be draft, published, deleted (the delete is soft delete)
+content
+title
+comment_status      To set whether users can comment or not on this post
+password            To restrict access to the post
+name                For the url
+comment_count       Every time a comment is made on a post, increment
+view_count          Every time a post is opened, increment
+
+POST_META >> Stores information about the post
+meta_name
+meta_value
+post_id
+
+COMMENT >> Stores comments people make on posts
+COMMENT_META >> Additional information about the comment made
+meta_name
+meta_value
+comment_id
+
+PAGE >> Static pages often loaded by menus
+title
+user_id
+content
+name                For the URL
+view_count
+
+CATEGORY >> Posts are grouped into categories and subcategories
+name
+description
+status              Categories when deactivated, links to the categories or articles of the category cannot be opened
+
+TAGS
+name
+post_count          Maintain this but update on every post create. Resolve once a day for forgotten cases.
+
+MENU
+name
+position
+
+MENU_ITEM
+menu_id
+label
+page_id
+parent_item
+menu_order
