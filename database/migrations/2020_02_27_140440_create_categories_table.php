@@ -15,6 +15,11 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->enum('status', [\App\Category::STATUS_ACTIVE, \App\Category::STATUS_DEACTIVATED])->default(\App\Category::STATUS_ACTIVE);
+            $table->bigInteger('post_count')->default(0);
+            $table->bigInteger('view_count')->default(0);
             $table->timestamps();
         });
     }

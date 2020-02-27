@@ -35,6 +35,8 @@ CATEGORY >> Posts are grouped into categories and subcategories
 name
 description
 status              Categories when deactivated, links to the categories or articles of the category cannot be opened
+post_count
+view_count
 
 POST >> An article created
 user_id             The author of the post
