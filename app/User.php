@@ -39,8 +39,13 @@ class User extends Authenticatable
 
     public static function generateUserName() {
         $uname = Utils::random_string(7,'l');
-        if (User::where('username', $uname)->count() > 0) {
-            self::generateUserName();
+        try {
+            if (User::where('username', $uname)->count() > 0) {
+                self::generateUserName();
+            }
+        }
+        catch (\Exception $exception) {
+            return $uname;
         }
         return $uname;
     }
@@ -58,5 +63,9 @@ class User extends Authenticatable
 
     public function getMetasAttribute() {
         return UserMeta::where('user_id', $this->id)->get();
+    }
+
+    public function getFullNameAttribute() {
+        return "$this->name $this->display_name";
     }
 }

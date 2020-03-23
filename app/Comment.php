@@ -29,8 +29,13 @@ class Comment extends Model
     }
 
     public static function defaultCommentStatus() {
-        if ($option = Option::where('name', 'comment_default_status')->first()) {
-            return $option->value;
+        try {
+            if ($option = Option::where('name', 'comment_default_status')->first()) {
+                return $option->value;
+            }
+        }
+        catch (\Exception $exception) {
+            return self::STATUS_DRAFT;
         }
         return self::STATUS_DRAFT;
     }

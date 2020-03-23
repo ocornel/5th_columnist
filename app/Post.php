@@ -18,9 +18,15 @@ class Post extends Model
 
     public static function generateName() {
         $name = Utils::random_string(10);
-        if (Post::where('name', $name)->count() > 0) {
-            self::generateName();
+        try {
+            if (Post::where('name', $name)->count() > 0) {
+                self::generateName();
+            }
         }
+        catch (\Exception $exception) {
+            return $name;
+        }
+
         return $name;
     }
 
@@ -41,9 +47,15 @@ class Post extends Model
 
 
     public static function defaultPostStatus() {
-        if ($option = Option::where('name', 'post_default_status')->first()) {
-            return $option->value;
+        try {
+            if ($option = Option::where('name', 'post_default_status')->first()) {
+                return $option->value;
+            }
         }
+        catch (\Exception $exception) {
+            return self::STATUS_DRAFT;
+        }
+
         return self::STATUS_DRAFT;
     }
 }
