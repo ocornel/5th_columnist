@@ -1,0 +1,31 @@
+
+:root {
+    --5c-blue: #56c8f3;
+    --5c-dark-grey: #232323;
+    --5c-light-grey: #434343;
+}
+
+.card-link {
+    text-decoration: none;
+    color: var(--5c-light-grey);
+}
+.card-link:hover {
+    text-decoration: none;
+    color: var(--5c-blue);
+}
+
+.image-bg {
+    height: var(--landing-category-card-height);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.caption-bottom {
+    display: flex;
+}
+
+.caption-bottom .caption {
+    align-self: flex-end;
+}
+

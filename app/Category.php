@@ -11,26 +11,60 @@ class Category extends Model
     const STATUS_ACTIVE = "Active";
     const STATUS_DEACTIVATED = "Deactivated";
 
-    public function getPostsAttribute() {
-        return Post::where('category_id', $this->id)->get();
+    const UNCATEGORIEZED = "No Category";
+
+    public function getPostsAttribute()
+    {
+        return Post::where('category_id', $this->id)->orderby('id', 'DESC')->get();
     }
 
-    public function resolvePostCount() {
+    public function LatestPosts($take = null)
+    {
+        $count = $take == null ? Option::ValueByKey('Limit Latest Post Per Category', 5) : $take;
+        return Post::where('category_id', $this->id)->orderby('id', 'DESC')->take($count)->get();
+    }
+
+    public function getLastPostAttribute()
+    {
+        return Post::where('category_id', $this->id)->orderby('id', 'DESC')->first();
+    }
+
+    public function getLastPostTitleAttribute()
+    {
+        if ($post = $this->last_post) {
+            return $post->title;
+        }
+        return 'None';
+    }
+
+    public function resolvePostCount()
+    {
         $this->update([
-            'post_count'=> count($this->posts)
+            'post_count' => count($this->posts)
         ]);
         return true;
     }
 
-    public function resolveViewCount() {
+    public function resolveViewCount()
+    {
         $view_count = 0;
-        $posts = $this->posts;
-        foreach ($posts as $post) {
+        foreach ($this->posts as $post) {
+            $post->resolveName();
             $view_count += $post->view_count;
         }
         $this->update([
-            'view_count'=> $view_count
+            'view_count' => $view_count
         ]);
         return true;
+    }
+
+    public function resolveStuff() {
+        $this->resolveViewCount();
+        $this->resolvePostCount();
+    }
+
+    public static function MostPopular()
+    {
+        return Category::where('name', '!=', Category::UNCATEGORIEZED)->orderby('view_count', 'DESC')->first();
     }
 }

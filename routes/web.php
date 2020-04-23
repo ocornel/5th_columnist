@@ -11,9 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+# public pages
+Route ::get('/', 'BlogController@landing')->name('landing');
+Route ::get('about', 'BlogController@landing')->name('about');
+Route ::get('contact', 'BlogController@landing')->name('contact');
+Route ::get('mi/{menu_item}', 'BlogController@load_menu_item')->name('load_menu_item');
+Route ::get('page_{page}/{page_name?}', 'BlogController@load_page')->name('load_page');
+Route ::get('post_{post}/{post_name?}', 'BlogController@load_post')->name('load_post');
+
 
 Auth::routes();
 

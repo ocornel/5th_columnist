@@ -23,4 +23,12 @@ class Role extends Model
         }
         return $actions;
     }
+
+    public static function AuthorRoles() {
+        $role_ids = [];
+        foreach (Role::whereIn('name', ['Administrator', 'Editor'])->get() as $role) {
+            array_push($role_ids, $role->id);
+        }
+        return $role_ids;
+    }
 }

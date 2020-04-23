@@ -1,0 +1,65 @@
+@import url("styles.css");
+
+:root {
+    --landing-category-card-height: 250px;
+}
+
+.category-card {
+    height: var(--landing-category-card-height);
+    border: solid var(--5c-blue) 1px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.popular_category-card {
+    height: calc(2 * var(--landing-category-card-height));
+    border: solid white 1px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.post-card {
+    min-height: 250px;
+}
+
+.masthead {
+    padding-top: 50px;
+    min-height: calc(2* var(--landing-category-card-height));
+    max-height: calc((2* var(--landing-category-card-height)) + 100px);
+    background-color: var(--5c-blue);
+}
+
+.block-title {
+    text-transform: uppercase;
+}
+
+.navbar-brand {
+    padding: unset;
+}
+
+.navbar-brand-logo {
+    height: 50px;
+}
+
+.social-list {
+    text-align: unset;
+}
+
+.bg-watermark-black {
+    background-color: #1b1e2190;
+    color: white;
+    font-weight: bold;
+    padding: 3px;
+}
+
+.thick-underline {
+    border-bottom: solid var(--5c-blue) 2px;
+}
+
+.category-list-item {
+    padding: 5px;
+    margin-bottom: 40px;
+}
+

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\URL;
 
 class Utils extends Model
 
@@ -97,11 +98,7 @@ class Utils extends Model
     public static function getWords($count=1) {
         $file = "public/words.txt";
         $file_arr = file($file);
-//        $num_lines = count($file_arr);
-//        $last_arr_index = $num_lines - 1;
-
         $words = "";
-
         while ($count > 0) {
             $random_line = explode(' ', $file_arr[array_rand($file_arr)]);
             $random_word_in_line = $random_line[array_rand($random_line)];
@@ -109,5 +106,33 @@ class Utils extends Model
             $count--;
         }
         return $words;
+    }
+
+    public static function GetFallbackImage() {
+        $fallback_image_options = [
+            'AR-200129787.jpg',
+            'keep-healthy-and-stay.png',
+            'prevention-of-diarrhoea.jpg',
+            'be-kind-to-support.jpg',
+            'stayhomesafely.jpg'
+        ];
+        return URL::to('img/fallback_images/'.$fallback_image_options[array_rand($fallback_image_options)]);
+    }
+
+    public static function ResolveStuff() {
+        # resolve Categories
+        foreach (Category::all() as $category) {
+            $category->resolveStuff();
+        }
+
+        # resolve Posts
+        foreach (Post::all() as $post) {
+            $post->resolveStuff();
+        }
+
+        # resolve Pages
+        foreach (Page::all() as $page) {
+            $page->resolveStuff();
+        }
     }
 }

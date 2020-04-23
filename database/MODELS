@@ -39,7 +39,7 @@ post_count
 view_count
 
 POST >> An article created
-user_id             The author of the post
+created_by             The author of the post
 publish_date        The time to make the post status published
 status              Post can be draft, published, deleted (the delete is soft delete)
 content
@@ -62,7 +62,7 @@ post_id
 COMMENT >> Stores comments people make on posts
 post_id
 content
-user_id
+created_by
 likes
 dislikes
 rating
@@ -76,7 +76,7 @@ comment_id
 
 PAGE >> Static pages often loaded by menus
 title
-user_id
+created_by
 content
 name                For the URL
 view_count
@@ -87,7 +87,6 @@ post_count          Maintain this but update on every post create. Resolve once 
 
 MENU
 name
-position
 
 MENU_ITEM
 menu_id

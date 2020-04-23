@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    protected $fillable = ['post_id', 'content', 'user_id', 'likes', 'dislikes', 'rating', 'status', 'parent_id'];
+    protected $fillable = ['post_id', 'content', 'created_by', 'likes', 'dislikes', 'rating', 'status', 'parent_id'];
 
     const STATUS_DRAFT = "Draft";
     const STATUS_APPROVED = "Approved";
@@ -17,7 +17,7 @@ class Comment extends Model
     }
 
     public function getUserAttribute() {
-        return User::find($this->user_id);
+        return User::find($this->created_by);
     }
 
     public function getChildrenAttribute() {
