@@ -13,7 +13,9 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $this->command->info('Creating Default Users');
+            if ($this->command) $this->command->info('Creating Default Users');
+
+
 
         $admin_role = Role::where('name', 'Administrator')->first();
         if ($admin_role) $admin_role_id = $admin_role->id; else $admin_role_id = null;

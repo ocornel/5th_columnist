@@ -96,8 +96,12 @@ class Utils extends Model
     }
 
     public static function getWords($count=1) {
-        $file = "public/words.txt";
-        $file_arr = file($file);
+        try {
+            $file_arr = file("public/words.txt");
+        }
+        catch (\Exception $exception) {
+            $file_arr = file('../public/words.txt');
+        }
         $words = "";
         while ($count > 0) {
             $random_line = explode(' ', $file_arr[array_rand($file_arr)]);

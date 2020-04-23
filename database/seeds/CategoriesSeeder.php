@@ -12,7 +12,8 @@ class CategoriesSeeder extends Seeder
      */
     public function run()
     {
-        $this->command->info('Creating Default Categories');
+
+        if ($this->command) $this->command->info('Creating Default Categories');
 
         $categories = [Category::UNCATEGORIEZED,'Politics', 'Sports', 'Lifestyle', 'Entertainment'];
         foreach ($categories as $category) {

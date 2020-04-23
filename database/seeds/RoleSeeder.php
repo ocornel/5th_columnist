@@ -2,6 +2,7 @@
 
 use App\Role;
 use Illuminate\Database\Seeder;
+use Symfony\Component\Debug\Exception as E;
 
 class RoleSeeder extends Seeder
 {
@@ -12,7 +13,7 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        $this->command->info('Creating Default Roles');
+        if ($this->command) $this->command->info('Creating Default Roles');
         $roles = ['Administrator','Editor', 'Subscriber'];
         foreach ($roles as $role) {
             Role::create(

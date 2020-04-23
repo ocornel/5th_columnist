@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Action;
 use App\Category;
+use App\Menu;
 use App\MenuItem;
 use App\Option;
 use App\Page;
 use App\Post;
+use App\Role;
+use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class BlogController extends Controller
 {
@@ -38,5 +43,28 @@ class BlogController extends Controller
 
     public function load_post(Post $post) {
         dd('Post Object', $post);
+    }
+
+    public function DeleteAll() {
+        foreach (Role::all() as $item) $item->delete();
+        foreach (Category::all() as $item) $item->delete();
+        foreach (Option::all() as $item) $item->delete();
+        foreach (Action::all() as $item) $item->delete();
+        foreach (Page::all() as $item) $item->delete();
+        foreach (Tag::all() as $item) $item->delete();
+        foreach (Menu::all() as $item) $item->delete();
+    }
+
+    public function prepare_dummy() {
+        $this->DeleteAll();
+        Artisan::call('db:seed');
+        Artisan::call('db:seed --class=DummyData');
+        return redirect(route('landing'));
+    }
+
+    public function delete_dummy() {
+        $this->DeleteAll();
+        Artisan::call('db:seed');
+        return redirect(route('landing'));
     }
 }

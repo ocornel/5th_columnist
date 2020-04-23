@@ -23,7 +23,7 @@ class CreatePagesTable extends Migration
             $table->bigInteger('view_count')->default(0);
             $table->timestamps();
 
-            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');;
         });
     }
 

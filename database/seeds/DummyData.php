@@ -23,20 +23,27 @@ class DummyData extends Seeder
         # ROLES
 
         # USERS
-        $this->command->info('Creating Dummy Users');
+
+        if ($this->command) $this->command->info('Creating Dummy Users');
+
         factory(User::class, 100)->create();
 
         # CATEGORIES
 
-        $this->command->info('Creating Dummy Categories');
+
+            if ($this->command) $this->command->info('Creating Dummy Categories');
+
         factory(Category::class, 5)->create();
 
         # POSTS
-        $this->command->info('Creating Dummy Posts');
+
+            if ($this->command) $this->command->info('Creating Dummy Posts');
+
         factory(Post::class, 50)->create();
 
         # COMMENTS
-        $this->command->info('Creating Dummy Comments');
+            if ($this->command) $this->command->info('Creating Dummy Comments');
+
         factory(Post::class, 20)->create();
 
         // bellow duplicates added to show comments with parent comments
@@ -44,23 +51,33 @@ class DummyData extends Seeder
         factory(Comment::class, 40)->create();
 
         # PAGES
-        $this->command->info('Creating Dummy Pages');
+
+            if ($this->command) $this->command->info('Creating Dummy Pages');
+
         factory(Page::class, 10)->create();
 
         # TAGS
-        $this->command->info('Creating Dummy Tags');
+
+            if ($this->command) $this->command->info('Creating Dummy Tags');
+
         factory(Tag::class, 50)->create();
 
         # MENUS
-        $this->command->info('Creating Dummy Menus');
+
+            if ($this->command) $this->command->info('Creating Dummy Menus');
+
         factory(Menu::class, 3)->create();
 
         # MENU ITEMS
-        $this->command->info('Creating Dummy Menu Items');
+
+            if ($this->command) $this->command->info('Creating Dummy Menu Items');
+
         factory(MenuItem::class, 20)->create();
 
         # RESOLVE STUFF
-        $this->command->info('Resolving Stuff');
+
+            if ($this->command) $this->command->info('Resolving Stuff');
+
         Utils::ResolveStuff();
 
     }

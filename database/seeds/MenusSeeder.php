@@ -12,7 +12,9 @@ class MenusSeeder extends Seeder
      */
     public function run()
     {
-        $this->command->info('Creating Default Menus');
+
+            if ($this->command) $this->command->info('Creating Default Menus');
+
 
         $menus = ['Main'];
         foreach ($menus as $menu) {

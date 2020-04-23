@@ -22,9 +22,9 @@ class CreateMenuItemsTable extends Migration
             $table->integer('menu_order')->default(0);
             $table->timestamps();
 
-            $table->foreign('menu_id')->references('id')->on('menus');
-            $table->foreign('page_id')->references('id')->on('pages');
-            $table->foreign('parent_item')->references('id')->on('menu_items');
+            $table->foreign('menu_id')->references('id')->on('menus')->onDelete('cascade');;
+            $table->foreign('page_id')->references('id')->on('pages')->onDelete('cascade');;
+            $table->foreign('parent_item')->references('id')->on('menu_items')->onDelete('cascade');;
         });
     }
 

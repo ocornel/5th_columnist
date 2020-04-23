@@ -22,6 +22,8 @@ Route ::get('contact', 'BlogController@landing')->name('contact');
 Route ::get('mi/{menu_item}', 'BlogController@load_menu_item')->name('load_menu_item');
 Route ::get('page_{page}/{page_name?}', 'BlogController@load_page')->name('load_page');
 Route ::get('post_{post}/{post_name?}', 'BlogController@load_post')->name('load_post');
+Route::get('prepare_dummy', 'BlogController@prepare_dummy')->name('prepare_dummy'); # todo move this to admin side once done
+Route::get('delete_dummy', 'BlogController@delete_dummy')->name('delete_dummy'); # todo move this to admin side once done
 
 
 Auth::routes();

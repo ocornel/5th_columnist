@@ -13,7 +13,9 @@ class OptionsSeeder extends Seeder
     public function run()
     {
 //        Options are settings
-        $this->command->info('Creating Option Settings');
+
+            if ($this->command) $this->command->info('Creating Option Settings');
+
 
         $options_array = array(
             [
