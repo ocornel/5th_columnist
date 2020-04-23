@@ -67,6 +67,7 @@
                 </div>
                 <div class="col-md-4  text-left">
                     <h2 class="block-title thick-underline">Trending Stories</h2>
+                    @if($most_popular_post != null)
                     <div class="row">
                         <div class="col-md-12">
                             <div class="post-card">
@@ -81,6 +82,7 @@
                         </div>
 
                     </div>
+                    @endif
 
                     {{--                    todo foreach post in trending posts--}}
                     @foreach($trending_posts as $post)
