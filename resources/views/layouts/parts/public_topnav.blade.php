@@ -16,7 +16,7 @@
 {{--                <li><a href="{{route('about')}}">About Us</a></li>--}}
 
                 @foreach(\App\MenuItem::where('menu_id', \App\Menu::MainMenuId())->get() as $menuItem)
-                    <li><a href="{{route('load_menu_item', $menuItem)}}">{{ $menuItem->label }}</a></li>
+                    <li><a href="{{route('load_menu_item', $menuItem)}}" class="text-capitalize">{{ $menuItem->label }}</a></li>
                 @endforeach
                 <li><a href="{{route('contact')}}">Contact Us</a></li>
 {{--                    <li>--}}

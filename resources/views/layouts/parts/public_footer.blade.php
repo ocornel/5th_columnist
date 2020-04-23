@@ -14,7 +14,7 @@
                             <ul class="footer-links">
                                 @foreach($menu->items as $menuItem)
                                     <li>
-                                        <a href="{{route('load_menu_item', $menuItem)}}">
+                                        <a href="{{route('load_menu_item', $menuItem)}}" class="text-capitalize">
                                             <span class="icon icon-angle-right"></span>
                                             {{ $menuItem->label }}
                                         </a>
