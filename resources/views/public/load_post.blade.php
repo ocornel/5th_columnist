@@ -33,15 +33,15 @@
                         @endauth
                     </h2>
                     <div class="meta-card">
-                        {{ \Carbon\Carbon::parse($post->publish_date)->format('D d/M/Y')  }} |
-                        Views: {{$post->view_count}} | Author:
-                        <a href="{{ route('load_author', [$post->created_by, $post->author->full_name]) }}">{{ $post->author->full_name }}</a>
-                        | Category: <a href="{{ route('load_category', [$post->category_id, $post->category->name, $post]) }}">{{$post->category->name}}</a>
+                        {{ \Carbon\Carbon::parse($post->publish_date)->format('D d/M/Y')  }}
+                        | <b class="text-capitalize">Views:</b> {{$post->view_count}}
+                        | <b class="text-capitalize">Author:</b><a href="{{ route('load_author', [$post->created_by, $post->author->full_name]) }}">{{ $post->author->full_name }}</a>
+                        | <b class="text-capitalize">Category:</b> <a href="{{ route('load_category', [$post->category_id, $post->category->name, $post]) }}">{{$post->category->name}}</a>
                         @foreach($post->metas as $meta)
-                            | {{$meta->meta_name}}: {{$meta->meta_value}}
+                            | <b class="text-capitalize">{{$meta->meta_name}}:</b> {{$meta->meta_value}}
                         @endforeach
                         <span class="pull-right">
-                            Tags:
+                            <b class="text-capitalize">Tags:</b>
                             @foreach($post->tag_list as $tag)
                                 <a href="{{ route('load_tag', $tag, $tag->name) }}" class="badge badge-primary">{{ $tag->name }} {{$tag->post_count}}</a>
                                 @endforeach

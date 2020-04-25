@@ -102,3 +102,13 @@
 .meta-card {
     margin-bottom: 10px;
 }
+
+.faint-border-bottom {
+    padding-bottom: 2px;
+    margin-bottom: 5px;
+    border-bottom: solid 1px var(--5c-faint-grey);
+}
+
+a > .faint-border-bottom:hover, .faint-border-bottom > a:hover{
+    background-color: var(--5c-faint-grey);
+}

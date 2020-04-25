@@ -22,16 +22,12 @@ class BlogController extends Controller
 {
 
     function landing() {
-        //        todo limit trending posts to option 'Trending Post Count'
-        $trending_posts = Post::where('status', Post::STATUS_PUBLISHED)->orderby('view_count', 'DESC')->take(intval(Option::ValueByKey('Trending Post Count', 5)))->get();
-
         $context = [
             'most_popular_category' => Category::MostPopular(),
             'most_popular_post' => Post::MostPopular(),
             'categories' => Category::whereNotIn('name',  [Category::UNCATEGORIEZED, Category::MostPopular()->name])->orderby('view_count', 'DESC')->get(),
             'latest_posts' =>Post::where('status', Post::STATUS_PUBLISHED)->orderby('id', 'DESC')->take(intval(Option::ValueByKey('Latest Post Count', 5)))->get(),
-            'trending_posts' => $trending_posts,
-
+            'trending_posts' => Post::TrendingPosts(),
         ];
         return view('public.landing', $context);
     }
@@ -53,7 +49,6 @@ class BlogController extends Controller
 
     public function load_post(Post $post) {
         if ($user = Auth::user() == null || !Auth::user()->canAction('Publish Post')) {
-//            if guest of cannot publish check for the publish status of the post before proceeding
             if ($post->status != Post::STATUS_PUBLISHED) {
 //            todo create page for when post not published
                 dd('Post not Published: page coming here.');
@@ -118,9 +113,9 @@ class BlogController extends Controller
         $context =[
             'post' => $lead_post,
             'category' =>$category,
+            'trending_posts' => Post::TrendingPosts(),
             'other_categories' => Category::publishedCategories()
         ];
-        dd('Category content coming here.', $context);
         return view('public.load_category', $context);
     }
 

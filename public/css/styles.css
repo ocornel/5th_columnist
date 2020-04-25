@@ -3,7 +3,8 @@
     --5c-blue: #56c8f3;
     --5c-dark-grey: #232323;
     --5c-light-grey: #434343;
-    --5c-faint-grey: #d3d3d3;
+    --5c-faint-grey: #eeeeee;
+    --h: 50;
 }
 
 .card-link {
@@ -32,4 +33,33 @@
 
 .height-100 {
     min-height: 100%;
+}
+
+.fix-height-2 {
+    min-height: 200px;
+    max-height: 200px;
+    overflow: hidden;
+}
+
+.fix-height-3 {
+    min-height: 300px;
+    max-height: 300px;
+    overflow: hidden;
+}
+
+.fix-height-4 {
+    min-height: 400px;
+    max-height: 400px;
+    overflow: hidden;
+}
+
+.fix-height-5 {
+    min-height: 500px;
+    max-height: 500px;
+    overflow: hidden;
+}
+
+.fix-height-var {
+    min-height: var(--h);
+    max-height:var(--h);
 }

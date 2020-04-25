@@ -142,4 +142,9 @@ class Post extends Model
         return Post::where('status', self::STATUS_PUBLISHED)->orderby('view_count', 'DESC')->first();
     }
 
+    public static function TrendingPosts() {
+        //        todo limit trending posts to option 'Trending days'
+        return Post::where('status', Post::STATUS_PUBLISHED)->orderby('view_count', 'DESC')->take(intval(Option::ValueByKey('Trending Post Count', 5)))->get();
+    }
+
 }

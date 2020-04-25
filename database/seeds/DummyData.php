@@ -53,7 +53,7 @@ class DummyData extends Seeder
 
         # COMMENTS
         if ($this->command) $this->command->info('Creating Dummy Comments');
-        factory(Post::class, 20)->create();
+        factory(Comment::class, 20)->create();
 
         // bellow duplicates added to show comments with parent comments
         factory(Comment::class, 50)->create();
