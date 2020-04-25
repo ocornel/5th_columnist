@@ -48,8 +48,8 @@ class DummyData extends Seeder
         factory(Post::class, 50)->create();
 
         # POST META
-//        if ($this->command) $this->command->info('Creating Dummy Post Meta');
-//        factory(PostMeta::class, 200)->create();
+        if ($this->command) $this->command->info('Creating Dummy Post Meta');
+        factory(PostMeta::class, 200)->create();
 
         # COMMENTS
         if ($this->command) $this->command->info('Creating Dummy Comments');
