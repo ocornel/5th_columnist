@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Page extends Model
 {
     protected $fillable = [
-        'title', 'created_by', 'content', 'name', 'view_count'
+        'title', 'created_by', 'content', 'name', 'view_count', 'description'
     ];
 
     public static function RandomPageName() {
@@ -24,6 +24,10 @@ class Page extends Model
         }
 
         return $name;
+    }
+
+    public function getAuthorAttribute() {
+        return User::find($this->created_by);
     }
 
     public function resolveName()

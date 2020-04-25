@@ -124,19 +124,29 @@ class Utils extends Model
     }
 
     public static function ResolveStuff() {
-        # resolve Categories
-        foreach (Category::all() as $category) {
-            $category->resolveStuff();
+        # resolve Comments
+        foreach (Comment::all() as $item) {
+            $item->resolveStuff();
         }
 
         # resolve Posts
-        foreach (Post::all() as $post) {
-            $post->resolveStuff();
+        foreach (Post::all() as $item) {
+            $item->resolveStuff();
+        }
+
+        # resolve Categories
+        foreach (Category::all() as $item) {
+            $item->resolveStuff();
         }
 
         # resolve Pages
-        foreach (Page::all() as $page) {
-            $page->resolveStuff();
+        foreach (Page::all() as $item) {
+            $item->resolveStuff();
+        }
+
+        # resolve Tags
+        foreach (Tag::all() as $item) {
+            $item->resolveStuff();
         }
     }
 }

@@ -44,6 +44,12 @@ class Post extends Model
         return Comment::where('post_id', $this->id)->get();
     }
 
+    public function getApprovedCommentsAttribute() {
+        return $this->comments->filter( function ($coment) {
+            return $coment->status == Comment::STATUS_APPROVED;
+        });
+    }
+
     public function resolveCommentCount()
     {
         $this->update([
@@ -61,9 +67,21 @@ class Post extends Model
         return true;
     }
 
-    public function resolveStuff() {
+    public function resolvePublishDate()
+    {
+        if(!$this->publish_date) {
+            $this->update([
+                'publish_date' => $this->created_at
+            ]);
+        }
+        return true;
+    }
+
+    public function resolveStuff()
+    {
         $this->resolveName();
         $this->resolveCommentCount();
+        $this->resolvePublishDate();
     }
 
     public function getCategoryAttribute()
@@ -79,6 +97,22 @@ class Post extends Model
         return Category::UNCATEGORIEZED;
     }
 
+    public function getTagListAttribute()
+    {
+        $tag_ids = explode(',', $this->tags);
+        return Tag::whereIn('id', $tag_ids)->get();
+    }
+
+    public function getRelatedPostsAttribute()
+    {
+        # Related posts are of the same category and share tags.
+        return Post::where('status', self::STATUS_PUBLISHED)->where('category_id', $this->category_id)->get()->filter(function ($post) {
+            $post_tag_ids = explode(',', $post->tags);
+            $this_tag_ids = explode(',', $this->tags);
+            return (sizeof(array_intersect($post_tag_ids, $this_tag_ids)) > 0);
+        });
+    }
+
     public function getMetasAttribute()
     {
         return PostMeta::where('post_id', $this->id)->get();
@@ -88,7 +122,6 @@ class Post extends Model
     {
         return User::find($this->created_by);
     }
-
 
     public static function defaultPostStatus()
     {
@@ -106,7 +139,7 @@ class Post extends Model
 
     public static function MostPopular()
     {
-        return Post::orderby('view_count', 'DESC')->first();
+        return Post::where('status', self::STATUS_PUBLISHED)->orderby('view_count', 'DESC')->first();
     }
 
 }

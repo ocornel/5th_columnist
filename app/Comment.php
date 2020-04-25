@@ -15,8 +15,7 @@ class Comment extends Model
     public function getPostAttribute() {
         return Post::find($this->post_id);
     }
-
-    public function getUserAttribute() {
+    public function getAuthorAttribute() {
         return User::find($this->created_by);
     }
 
@@ -28,15 +27,18 @@ class Comment extends Model
         return Comment::find($this->parent_id);
     }
 
+    public function resolveRating() {
+        $max = intval(Option::ValueByKey('Maximum Rating', 100));
+        $this->update([
+            'rating' => round($max * ($this->likes /($this->likes + $this->dislikes)),2)
+        ]);
+    }
+
+    public function resolveStuff() {
+        $this->resolveRating();
+    }
+
     public static function defaultCommentStatus() {
-        try {
-            if ($option = Option::where('name', 'comment_default_status')->first()) {
-                return $option->value;
-            }
-        }
-        catch (\Exception $exception) {
-            return self::STATUS_DRAFT;
-        }
-        return self::STATUS_DRAFT;
+        return Option::ValueByKey('Default Comment Status', self::STATUS_APPROVED);
     }
 }

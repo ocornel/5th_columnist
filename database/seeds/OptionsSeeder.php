@@ -81,6 +81,11 @@ class OptionsSeeder extends Seeder
                 'default' => 6,
             ],
 
+            [
+                'key' => 'Maximum Rating',
+                'default' => 10,
+            ],
+
         );
 
         foreach ($options_array as $option) {

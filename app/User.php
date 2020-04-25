@@ -74,4 +74,30 @@ class User extends Authenticatable
         }
         return $this->username;
     }
+
+    public function canAction($action_text = null) {
+        return $this->actionCan($action_text);
+    }
+
+    public function actionCan($action_text = null) {
+//        todo privilege check
+        return true;
+    }
+
+    public function getPostsAttribute() {
+        return Post::where('created_by', $this->id)->get();
+    }
+
+    public function getHasPublishedPostAttribute() {
+        foreach ($this->posts as $post) {
+            if ($post->status == Post::STATUS_PUBLISHED) return true;
+        }
+        return false;
+    }
+
+    public static function publishedAuthors() {
+        return User::all()->filter( function ($user) {
+            return $user->has_published_post;
+        });
+    }
 }

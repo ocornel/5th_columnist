@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Utils;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,6 +25,7 @@ class HomeController extends Controller
     public function index()
     {
 //        return view('home');
+        Utils::ResolveStuff();
         return view('dashboard');
     }
 }

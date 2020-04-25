@@ -22,7 +22,7 @@ class Category extends Model
     public function LatestPosts($take = null)
     {
         $count = $take == null ? Option::ValueByKey('Limit Latest Post Per Category', 5) : $take;
-        return Post::where('category_id', $this->id)->orderby('id', 'DESC')->take($count)->get();
+        return Post::where('status', Post::STATUS_PUBLISHED)->where('category_id', $this->id)->orderby('id', 'DESC')->take($count)->get();
     }
 
     public function getLastPostAttribute()
@@ -67,5 +67,19 @@ class Category extends Model
     public static function MostPopular()
     {
         return Category::where('name', '!=', Category::UNCATEGORIEZED)->orderby('view_count', 'DESC')->first();
+    }
+
+
+    public function getHasPublishedPostAttribute() {
+        foreach ($this->posts as $post) {
+            if ($post->status == Post::STATUS_PUBLISHED) return true;
+        }
+        return false;
+    }
+
+    public static function publishedCategories() {
+        return Category::all()->filter(function ($category) {
+            return $category->has_published_post;
+        });
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Action;
 use App\Category;
+use App\Comment;
 use App\Menu;
 use App\MenuItem;
 use App\Option;
@@ -11,22 +12,25 @@ use App\Page;
 use App\Post;
 use App\Role;
 use App\Tag;
+use App\User;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Session;
 
 class BlogController extends Controller
 {
 
     function landing() {
-        $popular_category = Category::MostPopular();
-        $popular_post = Post::MostPopular();
-//        todo limit trending posts to iption 'Trending Post Count'
+        //        todo limit trending posts to option 'Trending Post Count'
+        $trending_posts = Post::where('status', Post::STATUS_PUBLISHED)->orderby('view_count', 'DESC')->take(intval(Option::ValueByKey('Trending Post Count', 5)))->get();
+
         $context = [
-            'most_popular_category' => $popular_category,
-            'most_popular_post' => $popular_post,
-            'categories' => Category::whereNotIn('name',  [Category::UNCATEGORIEZED, $popular_category->name])->orderby('view_count', 'DESC')->get(),
-            'latest_posts' =>Post::orderby('id', 'DESC')->take(intval(Option::ValueByKey('Latest Post Count', 5)))->get(),
-            'trending_posts' =>Post::orderby('view_count', 'DESC')->take(intval(Option::ValueByKey('Trending Post Count', 5)))->get(),
+            'most_popular_category' => Category::MostPopular(),
+            'most_popular_post' => Post::MostPopular(),
+            'categories' => Category::whereNotIn('name',  [Category::UNCATEGORIEZED, Category::MostPopular()->name])->orderby('view_count', 'DESC')->get(),
+            'latest_posts' =>Post::where('status', Post::STATUS_PUBLISHED)->orderby('id', 'DESC')->take(intval(Option::ValueByKey('Latest Post Count', 5)))->get(),
+            'trending_posts' => $trending_posts,
 
         ];
         return view('public.landing', $context);
@@ -38,11 +42,99 @@ class BlogController extends Controller
     }
 
     public function load_page(Page $page) {
-        dd('Page Object', $page);
+        $page->update([
+            'view_count'=>$page->view_count + 1
+        ]);
+        $context =[
+            'page' => $page
+        ];
+        return view('public.load_page', $context);
     }
 
     public function load_post(Post $post) {
-        dd('Post Object', $post);
+        if ($user = Auth::user() == null || !Auth::user()->canAction('Publish Post')) {
+//            if guest of cannot publish check for the publish status of the post before proceeding
+            if ($post->status != Post::STATUS_PUBLISHED) {
+//            todo create page for when post not published
+                dd('Post not Published: page coming here.');
+            }
+        }
+        if ($post->status == Post::STATUS_DELETED) {
+//            todo create page for when post is deleted
+            dd('Post Deleted page coming here.');
+        }
+
+        $post->update([
+            'view_count'=>$post->view_count + 1
+        ]);
+        $post->resolveStuff();
+        $context =[
+            'post' => $post,
+            'tags' =>$post->tag_list,
+            'related_posts' =>$post->related_posts
+        ];
+        return view('public.load_post', $context);
+    }
+
+    public function post_toggle(Post $post) {
+        if ($user = Auth::user()) {
+            if ($user->canAction('Publish Post')) {
+                $new_status = $post->status == Post::STATUS_DRAFT? Post::STATUS_PUBLISHED : Post::STATUS_DRAFT;
+                $post->update([
+                    'status'=> $new_status
+                ]);
+                return redirect()->back()->with('success', 'Post updated successfully.');
+            }
+        }
+        return redirect()->back()->with('error', 'You cannot perform that action.');
+    }
+
+
+    public function load_author(User $user) {
+        $context =[
+            'author' => $user,
+            'other_authors' => User::publishedAuthors()
+        ];
+        dd('Author content coming here.', $context);
+        return view('public.load_author', $context);
+    }
+
+    public function post_comment(Request $request) {
+        $request['created_by'] = Auth::user()->id;
+        if(strlen($request['content']) > 1000) {
+            Session::flash('error', 'Comment too long.');
+            return redirect()->back();
+        }
+        $comment = Comment::create($request->all());
+        return redirect(route('load_post',[$comment->post, $comment->post->name]));
+    }
+
+    public function load_category(Category $category,$name = null, $post_id = null) {
+        foreach ($category->posts as $post) {
+            $post->resolveStuff();
+        }
+        $category->resolveStuff();
+        $lead_post = Post::find(intval($post_id));
+        $context =[
+            'post' => $lead_post,
+            'category' =>$category,
+            'other_categories' => Category::publishedCategories()
+        ];
+        dd('Category content coming here.', $context);
+        return view('public.load_category', $context);
+    }
+
+    public function load_tag(Tag $tag) {
+        foreach ($tag->posts as $post) {
+            $post->resolveStuff();
+        }
+        $tag->resolveStuff();
+        $context =[
+            'tag' =>$tag,
+            'other_tags' => Tag::publishedTags()
+        ];
+        dd('tag content coming here.', $context);
+        return view('public.load_tag', $context);
     }
 
     public function DeleteAll() {

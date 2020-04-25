@@ -120,15 +120,18 @@
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/logo.png') }}">
     <link rel="icon" type="image/png" href="{{ asset('img/logo.png') }}" sizes="32x32">
     <link rel="icon" type="image/png" href="{{ asset('img/logo.png') }}" sizes="16x16">
-    <link rel="manifest" href="{{ asset('docs/manifest.json') }}">
+{{--    <link rel="manifest" href="{{ asset('docs/manifest.json') }}">--}}
     <link rel="mask-icon" href="{{ asset('img/logo.png') }}" color="#38c8dd">
     <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400italic,500,700">
+{{--    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400italic,500,700">--}}
     <link rel="stylesheet" href="{{ asset('css/vendor.min.css')}}">
     <link rel="stylesheet" href="{{ asset('css/elephant.min.css')}}">
     <link rel="stylesheet" href="{{ asset('css/landing-page.min.css')}}">
-    <link href="{{asset('packages/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
-    <link href="{{asset('packages/datatables.min.css')}}" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="{{asset('packages/css/font-awesome.min.css')}}" rel="stylesheet">
+    <link href="{{asset('packages/summernote/summernote.css')}}" rel="stylesheet" media="all">
+    <link href="{{asset('packages/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
+
     @yield('additional_styles')
     <link href="{{ asset('css/public_styles.css') }}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -137,12 +140,18 @@
 <body class="spinner spinner-primary spinner-lg">
 @include('layouts.parts.public_topnav')
 <div style="min-height: 50px"></div>
+{{--    todo messages flash as in rcl flash--}}
+
 @yield('content')
 @include('layouts.parts.public_footer')
 
 <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
+<script src="{{ asset('packages/js/dataTables.bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/vendor.min.js')}}"></script>
 <script src="{{ asset('js/elephant.min.js')}}"></script>
+<script src="{{ asset('packages/summernote/summernote.min.js') }}"></script>
+{{--<script src="{{ asset('packages/summernote/summernote.js') }}"></script>--}}
+
 <script src="{{ asset('js/landing-page.min.js')}}"></script>
 @yield('additional_scripts')
 <script src="{{ asset('js/scripts.js') }}"></script>
@@ -176,6 +185,48 @@
     imgs.forEach(img => {
         observer.observe(img);
     });
+
+    // Post actions
+    function likePost(post_id) {
+        console.log('liked post ' + post_id);
+    }
+
+    function hatePost(post_id) {
+        console.log('hated post ' + post_id);
+    }
+
+    // Comment actions
+    function likeComment(comment_id) {
+        console.log('liked comment ' + comment_id);
+    }
+
+    function hateComment(comment_id) {
+        console.log('hated comment ' + comment_id);
+    }
+
+    function replyComment(comment_id, comment_content) {
+        console.log('replying to comment: ' + comment_content);
+        document.getElementById('parent_comment_id').value = comment_id;
+        document.getElementById('target_comment').innerHTML = "Replying to: "+ comment_content;
+    }
+
+    // editor
+    $(document).ready(function () {
+        $('.public-editor').summernote({
+                placeholder: 'Type Content',
+                // toolbar: [
+                //     ['style', ['bold', 'italic', 'underline', 'clear']],
+                //     ['insert', ['hr', 'link', 'table']],
+                //     ['font', ['strikethrough', 'superscript', 'subscript']],
+                //     ['fontsize', ['fontsize']],
+                //     ['color', ['color']],
+                //     ['para', ['ul', 'ol', 'paragraph']],
+                //     ['misc', ['fullscreen', 'undo', 'redo']],
+                // ]
+            }
+        );
+    });
+
 </script>
 </body>
 </html>
