@@ -8,6 +8,7 @@ use App\Page;
 use App\Post;
 use App\PostMeta;
 use App\Tag;
+use App\UserMeta;
 use App\Utils;
 use Illuminate\Database\Seeder;
 use App\User;
@@ -30,8 +31,8 @@ class DummyData extends Seeder
         factory(User::class, 10)->create();
 
         # USER META
-//        if ($this->command) $this->command->info('Creating Dummy User Meta');
-//        factory(PostMeta::class, 40)->create();
+        if ($this->command) $this->command->info('Creating Dummy User Meta');
+        factory(UserMeta::class, 40)->create();
 
         # CATEGORIES
         if ($this->command) $this->command->info('Creating Dummy Categories');
