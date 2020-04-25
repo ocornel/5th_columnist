@@ -4,6 +4,7 @@
 
 use App\Role;
 use App\User;
+use App\Utils;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
@@ -30,12 +31,16 @@ $factory->define(User::class, function (Faker $faker) {
         array_push($role_ids, $role->id);
     }
 
+    $urls = [null,$faker->url()];
+
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'remember_token' => Str::random(10),
+        'about'=>Utils::getWords(rand(10,300)),
+        'url'=>$urls[array_rand($urls)],
         'role_id'=>$role_ids[array_rand($role_ids)]
     ];
 });

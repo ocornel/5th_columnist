@@ -88,9 +88,9 @@ class BlogController extends Controller
     public function load_author(User $user) {
         $context =[
             'author' => $user,
+            'trending_posts' => Post::TrendingPosts(),
             'other_authors' => User::publishedAuthors()
         ];
-        dd('Author content coming here.', $context);
         return view('public.load_author', $context);
     }
 
@@ -124,11 +124,13 @@ class BlogController extends Controller
             $post->resolveStuff();
         }
         $tag->resolveStuff();
+
         $context =[
             'tag' =>$tag,
+            'trending_posts' => Post::TrendingPosts(),
             'other_tags' => Tag::publishedTags()
         ];
-        dd('tag content coming here.', $context);
+//        dd('tag content coming here.', $context);
         return view('public.load_tag', $context);
     }
 

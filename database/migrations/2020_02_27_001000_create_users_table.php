@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('username')->default(\App\User::generateUserName());
             $table->text('url')->nullable();
+            $table->text('about')->nullable();
+            $table->text('ppic_url')->nullable();
             $table->string('display_name')->nullable();
             $table->unsignedBigInteger('role_id')->nullable();
             $table->rememberToken();

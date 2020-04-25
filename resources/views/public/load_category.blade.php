@@ -14,6 +14,8 @@
             <div class="row">
                 <div class="col-md-9">
                     <h2 class="block-title thick-underline">Stories in {{$category->name}}</h2>
+                    <div>{!! $category->description !!}</div>
+                    <br>
                     @isset($post)
                         <div class="row faint-border-bottom">
                             <a href="{{ route('load_post', [$post, $post->name]) }}" class="card-link">

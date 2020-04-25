@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\URL;
 
 class User extends Authenticatable
 {
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'username', 'url', 'display_name', 'role_id'
+        'name', 'email', 'password', 'username', 'url', 'display_name', 'role_id', 'about', 'ppic_url'
     ];
 
     /**
@@ -82,6 +83,20 @@ class User extends Authenticatable
     public function actionCan($action_text = null) {
 //        todo privilege check
         return true;
+    }
+
+    public function getWebLinkAttribute() {
+        if ($this->url) {
+            return $this->url;
+        }
+        return route('load_author', [$this, $this->full_name]);
+    }
+
+    public function getPpicAttribute() {
+        if ($this->ppic_url) {
+            return URL::to('storage/' . $this->ppic_url);
+        }
+        return URL::to('img/fallback_images/no-ppic.png');
     }
 
     public function getPostsAttribute() {

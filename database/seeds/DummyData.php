@@ -28,11 +28,11 @@ class DummyData extends Seeder
 
         # USERS
         if ($this->command) $this->command->info('Creating Dummy Users');
-        factory(User::class, 10)->create();
+        factory(User::class, 100)->create();
 
         # USER META
         if ($this->command) $this->command->info('Creating Dummy User Meta');
-        factory(UserMeta::class, 40)->create();
+        factory(UserMeta::class, 400)->create();
 
         # CATEGORIES
         if ($this->command) $this->command->info('Creating Dummy Categories');
@@ -45,7 +45,7 @@ class DummyData extends Seeder
 
         # POSTS
         if ($this->command) $this->command->info('Creating Dummy Posts');
-        factory(Post::class, 50)->create();
+        factory(Post::class, 200)->create();
 
         # POST META
         if ($this->command) $this->command->info('Creating Dummy Post Meta');
