@@ -10,11 +10,16 @@ class OptionController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function options($type = null)
     {
-        //
+        $context = [
+            'options'=>Option::all()->groupBy('value_type'),
+            'tab'=> $type
+        ];
+        dd('options page coming here', $context);
+        return view('backend.options.options');
     }
 
     /**

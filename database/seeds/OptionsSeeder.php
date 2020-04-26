@@ -21,24 +21,29 @@ class OptionsSeeder extends Seeder
             [
                 'key' => 'Landing Title',
                 'default' => "What is trending in Kenya.",
+                'value_type' =>Option::TYPE_STR
             ],
             [
                 'key' => 'Landing Description',
                 'default' => "Getting all the news that are trending in Kenya.",
+                'value_type' =>Option::TYPE_STR
             ],
 
             [
                 'key' => 'Contact Title',
                 'default' => "Talk to us.",
+                'value_type' =>Option::TYPE_STR
             ],
             [
                 'key' => 'Contact Description',
                 'default' => "Find our contact information and contact form.",
+                'value_type' =>Option::TYPE_STR
             ],
 
             [
                 'key' => 'Footer Title',
                 'default' => "Welcome to Inatrend Kenya",
+                'value_type' =>Option::TYPE_STR
             ],
 
             [
@@ -59,31 +64,37 @@ class OptionsSeeder extends Seeder
                     </a>
                 </div>
                 ",
+                'value_type' =>Option::TYPE_LON
             ],
 
             [
                 'key' => 'Latest Post Count',
                 'default' => 4,
+                'value_type' =>Option::TYPE_NUM
             ],
 
             [
                 'key' => 'Trending Post Count',
                 'default' => 4,
+                'value_type' =>Option::TYPE_NUM
             ],
 
             [
                 'key' => 'Trending Days Limit',
                 'default' => 30,
+                'value_type' =>Option::TYPE_NUM
             ],
 
             [
                 'key' => 'Limit Latest Post Per Category',
                 'default' => 6,
+                'value_type' =>Option::TYPE_NUM
             ],
 
             [
                 'key' => 'Maximum Rating',
                 'default' => 10,
+                'value_type' =>Option::TYPE_NUM
             ],
 
         );
@@ -91,7 +102,8 @@ class OptionsSeeder extends Seeder
         foreach ($options_array as $option) {
             Option::create([
                 'key' => $option['key'],
-                'default' => $option['default']
+                'default' => $option['default'],
+                'value_type' =>$option['value_type']
             ]);
         }
     }

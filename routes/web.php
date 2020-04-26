@@ -36,3 +36,30 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/charts', 'HomeController@charts')->name('charts');
 Route::get('/reports', 'HomeController@reports')->name('reports');
+
+# PAGES
+Route::get('/pages}', 'PageController@pages')->name('pages');
+
+# MENUS
+Route::get('/menus', 'MenuController@menus')->name('menus');
+
+# CATEGORIES
+Route::get('/categories/{status?}', 'CategoryController@categories')->name('categories');
+
+# TAGS
+Route::get('/tags', 'TagController@tags')->name('tags');
+
+# POSTS
+Route::get('/posts/{status?}/{category?}', 'PostController@posts')->name('posts');
+
+# COMMENTS
+Route::get('/comments/{status?}', 'CommentController@comments')->name('comments');
+
+# ROLES
+Route::get('/roles', 'RoleController@roles')->name('roles');
+
+# USERS
+Route::get('/users/{role?}', 'UserController@users')->name('users');
+
+# OPTIONS
+Route::get('/settings/{type?}', 'OptionController@options')->name('options');

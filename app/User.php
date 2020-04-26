@@ -110,6 +110,22 @@ class User extends Authenticatable
         return false;
     }
 
+    public function getMessagesAttribute() {
+        return NoticeMessage::where('status', '!=', NoticeMessage::STATUS_DELETED)->get()->filter( function ($message) {
+            return $message->role_id == $this->role_id;
+        })->groupBy('status');
+    }
+
+    public function getUnreadMessagesAttribute() {
+        return NoticeMessage::whereStatus(NoticeMessage::STATUS_NEW)->get()->filter( function ($message) {
+            return $message->role_id == $this->role_id;
+        });
+    }
+
+    public function getMessageCountAttribute() {
+        return $this->unread_messages->count();
+    }
+
     public static function publishedAuthors() {
         return User::all()->filter( function ($user) {
             return $user->has_published_post;

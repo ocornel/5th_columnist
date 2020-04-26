@@ -5,7 +5,7 @@
     <div class="navbar navbar-default">
         <div class="navbar-header">
             <a class="navbar-brand navbar-brand-center" href="{{route('home')}}">
-                <img class="navbar-brand-logo" src="{{ asset('img/icon_red_bg.jpg')}}" alt="Logo">
+                <img class="navbar-brand-logo" src="{{ asset('img/logo.jpeg')}}" alt="Logo">
             </a>
             <button class="navbar-toggler visible-xs-block collapsed" type="button" data-toggle="collapse"
                     data-target="#sidenav">
@@ -25,8 +25,7 @@
                 <span class="sr-only">Toggle navigation</span>
                 <span class="arrow-up"></span>
                 <span class="ellipsis ellipsis-vertical">
-              <img class="ellipsis-object" width="32" height="32" src="{{asset(Auth::user()->ppic_url)}}"
-                   alt="{{Auth::user()->full_name}}"> <!-- todo get user ppic and name -->
+              <img class="ellipsis-object" width="32" height="32" data-src="{{Auth::user()->ppic}}" alt="Pic"> <!-- todo get user ppic and name -->
             </span>
             </button>
         </div>
@@ -128,8 +127,7 @@
                     </li>
                     <li class="dropdown hidden-xs">
                         <button class="navbar-account-btn" data-toggle="dropdown" aria-haspopup="true">
-                            <img class="rounded" width="36" height="36" src="{{asset('img/no-ppic.jpg')}}"
-                                 alt="{{Auth::user()->full_name}}"> {{Auth::user()->full_name}}
+                            <img class="rounded" width="36" height="36" data-src="{{Auth::user()->ppic}}" alt="Pic"> {{Auth::user()->full_name}}
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-right">

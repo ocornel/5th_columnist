@@ -6,7 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Option extends Model
 {
-    protected $fillable = ['key', 'value', 'default'];
+    protected $fillable = ['key', 'value', 'default', 'value_type'];
+
+    const TYPE_NUM = 'Numerical';
+    const TYPE_STR = 'Short text';
+    const TYPE_LON = 'Long text';
+
+    const VALUE_TYPES = [
+        self::TYPE_NUM,
+        self::TYPE_STR,
+        self::TYPE_LON
+    ];
 
     public function getSetValueAttribute() {
         if ($this->value) {

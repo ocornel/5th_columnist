@@ -10,12 +10,17 @@ class RoleController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function roles()
     {
-        //
+        $context = [
+            'roles'=>Role::all()->groupBy('status'),
+        ];
+        dd('roles page coming here', $context);
+        return view('backend.roles.roles');
     }
+
 
     /**
      * Show the form for creating a new resource.

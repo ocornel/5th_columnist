@@ -28,6 +28,14 @@ class ActionsSeeder extends Seeder
                 'description' => "Changes the status of a post between published and draft.",
             ],
             [
+                'name' => 'Publish Comment',
+                'description' => "Changes the status of a comment between approved and draft.",
+            ],
+            [
+                'name' => 'Manage Users',
+                'description' => "Changes the status of a comment between approved and draft.",
+            ],
+            [
                 'name' => 'Create Page',
                 'description' => "Creates, edits and deletes pages.",
             ]

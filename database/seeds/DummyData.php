@@ -39,7 +39,6 @@ class DummyData extends Seeder
         factory(Category::class, 5)->create();
 
         # TAGS
-
         if ($this->command) $this->command->info('Creating Dummy Tags');
         factory(Tag::class, 50)->create();
 

@@ -10,11 +10,15 @@ class TagController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function tags()
     {
-        //
+        $context = [
+            'tags'=>Tag::all(),
+        ];
+        dd('Tags page coming here', $context);
+        return view('backend.tags.tags');
     }
 
     /**

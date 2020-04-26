@@ -10,11 +10,17 @@ class CommentController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function comments($status = null)
     {
-        //
+        $comments = $status? Comment::whereStatus($status)->get(): Comment::all();
+        $context = [
+            'comment_by_status'=>$comments->groupBy('status'),
+            'tab'=> $status
+        ];
+        dd('Stories page coming here', $context);
+        return view('backend.comments.comments');
     }
 
     /**

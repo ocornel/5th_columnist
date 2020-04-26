@@ -10,11 +10,15 @@ class PageController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function pages()
     {
-        //
+        $context = [
+            'pages'=>Page::all(),
+        ];
+        dd('Liss of pages coming here', $context);
+        return view('backend.pages.pages');
     }
 
     /**
