@@ -4,6 +4,24 @@
             <div class="col-sm-12 col-md-6">
                 <h4 class="footer-heading">{{ \App\Option::ValueByKey('Footer Title') }}</h4>
                 {!! \App\Option::ValueByKey('Footer Description') !!}
+                Backend:
+                @guest
+                    <a class="nav-link"
+                                   href="{{ route('login') }}">{{ __('Login') }}</a> &nbsp;
+                    @if (Route::has('register'))
+                        <a class="nav-link"
+                           href="{{ route('register') }}">{{ __('Register') }}</a>
+                    @endif
+                @else
+                    <a href="{{ route('home') }}">{{ Auth::user()->role_name }}'s Portal</a> &nbsp;
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                        >{{__('Logout')}}</a>
+                @endguest
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
 
             </div>
             <div class="col-sm-12 col-md-6">
@@ -29,8 +47,5 @@
         </div>
         <p>Copyright &copy; <?php echo date("Y"); ?> <a href="{{ route('landing') }}" target="_blank">Inatrend Kenya</a>
         </p>
-        <p>(temporary quick setup for admin)
-            <a href="{{ route('prepare_dummy') }}" class="btn btn-sm btn-danger">Setup Dummy</a> <a
-                href="{{ route('delete_dummy') }}" class="btn btn-sm btn-danger">Delete Dummy</a></p>
     </div>
 </div>

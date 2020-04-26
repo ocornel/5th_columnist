@@ -20,17 +20,17 @@
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/logo.png') }}">
     <link rel="icon" type="image/png" href="{{ asset('img/logo.png') }}" sizes="32x32">
     <link rel="icon" type="image/png" href="{{ asset('img/logo.png') }}" sizes="16x16">
-    <link rel="manifest" href="{{ asset('docs/manifest.json') }}">
+{{--    <link rel="manifest" href="{{ asset('docs/manifest.json') }}">--}}
     <link rel="mask-icon" href="{{ asset('img/logo.png') }}" color="#38c8dd">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400italic,500,700">
+      <link href="{{asset('packages/css/font-awesome.min.css')}}" rel="stylesheet">
+      <link href="{{asset('packages/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
       <link rel="stylesheet" href="{{ asset('css/vendor.min.css')}}">
+      <link href="{{asset('packages/summernote/summernote.css')}}" rel="stylesheet" media="all">
       <link rel="stylesheet" href="{{ asset('css/elephant.min.css')}}">
       <link rel="stylesheet" href="{{ asset('css/application.min.css')}}">
       <link rel="stylesheet" href="{{ asset('css/demo.min.css')}}">
-
-      <link href="{{asset('packages/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
-      <link href="{{asset('packages/datatables.min.css')}}" rel="stylesheet">
       @yield('additional_styles')
       <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
       <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -57,6 +57,7 @@
                     </div>
                 </h1>
             </div>
+            {{--    todo messages flash as in rcl flash--}}
             @yield('content')
         </div>
       </div>
@@ -69,18 +70,19 @@
         @csrf
     </form>
     <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
+    <script src="{{ asset('packages/js/dataTables.bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/vendor.min.js')}}"></script>
+    <script src="{{ asset('packages/summernote/summernote.min.js') }}"></script>
     <script src="{{ asset('js/elephant.min.js')}}"></script>
     <script src="{{ asset('js/application.min.js')}}"></script>
     <script src="{{ asset('js/demo.min.js')}}"></script>
     {{--    <script src="{{ asset('packages/fontawesome-free/js/all.min.js') }}"></script>--}}
 
     {{--    <script src="{{ asset('packages/datatables.min.js') }}"></script>--}}
-    @yield('additional_scripts')
     <script src="{{ asset('js/scripts.js') }}"></script>
+    @yield('additional_scripts')
     <script>
-        $("input[required]").parent().addClass("required");
-        $(".dataTable").dataTable();
+
     </script>
   </body>
 </html>

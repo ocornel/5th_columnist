@@ -4,27 +4,29 @@
         <div class="custom-scrollbar">
             <nav id="sidenav" class="sidenav-collapse collapse">
                 <ul class="sidenav level-1">
-                    <li class="sidenav-search">
-                        <form class="sidenav-form" action="http://demo.madebytilde.com/">
-                            <div class="form-group form-group-sm">
-                                <div class="input-with-icon">
-                                    <input class="form-control" type="text" placeholder="Search…">
-                                    <span class="icon icon-search input-icon"></span>
-                                </div>
-                            </div>
-                        </form>
-                    </li>
+                    {{--                    <li class="sidenav-search">--}}
+                    {{--                        <form class="sidenav-form" action="http://demo.madebytilde.com/">--}}
+                    {{--                            <div class="form-group form-group-sm">--}}
+                    {{--                                <div class="input-with-icon">--}}
+                    {{--                                    <input class="form-control" type="text" placeholder="Search…">--}}
+                    {{--                                    <span class="icon icon-search input-icon"></span>--}}
+                    {{--                                </div>--}}
+                    {{--                            </div>--}}
+                    {{--                        </form>--}}
+                    {{--                    </li>--}}
                     <li class="sidenav-heading">Navigation</li>
                     <li class="sidenav-item has-subnav">
-                        <a href="dashboard-1.html" aria-haspopup="true">
+                        <a href="" aria-haspopup="true">
                             <span class="sidenav-icon icon icon-works">&#103;</span>
                             <span class="sidenav-label">Dashboards</span>
                         </a>
                         <ul class="sidenav level-2 collapse">
                             <li class="sidenav-heading">Dashboards</li>
-                            <li><a href="dashboard-1.html">Dashboard 1</a></li>
-                            <li><a href="dashboard-2.html">Dashboard 2</a></li>
-                            <li><a href="dashboard-3.html">Dashboard 3</a></li>
+                            <li><a href="{{ route('home') }}">Default</a></li>
+                            @if(Auth::user()->canAction('View Reports'))
+                                <li><a href="{{ route('charts') }}">Charts</a></li>
+                                <li><a href="{{ route('reports') }}">Reports</a></li>
+                            @endif
                         </ul>
                     </li>
                     <li class="sidenav-item">

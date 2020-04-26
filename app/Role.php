@@ -11,6 +11,11 @@ class Role extends Model
     const STATUS_ACTIVE = "Active";
     const STATUS_DEACTIVATED = "Deactivated";
 
+    const STATUSES = [
+        self::STATUS_ACTIVE,
+        self::STATUS_DEACTIVATED
+    ];
+
     public function getUsersAttribute() {
         return User::where('role_id', $this->id)->get();
     }

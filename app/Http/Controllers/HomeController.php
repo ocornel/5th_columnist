@@ -24,8 +24,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-//        return view('home');
         Utils::ResolveStuff();
         return view('dashboard');
     }
+
+    public function charts()
+    {
+        dd('Statistical charts will be shown here');
+        return view('charts');
+    }
+
+    public function reports()
+    {
+        dd('Data reports will be shown here');
+        return view('reports');
+    }
+
 }

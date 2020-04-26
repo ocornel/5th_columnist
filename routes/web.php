@@ -34,3 +34,5 @@ Route::get('delete_dummy', 'BlogController@delete_dummy')->name('delete_dummy');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/charts', 'HomeController@charts')->name('charts');
+Route::get('/reports', 'HomeController@reports')->name('reports');

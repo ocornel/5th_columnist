@@ -59,7 +59,7 @@ class User extends Authenticatable
         if($role = $this->role) {
             return $role->name;
         }
-        return "Unassigned.";
+        return "Unassigned Role";
     }
 
     public function getMetasAttribute() {
