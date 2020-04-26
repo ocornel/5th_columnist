@@ -11,11 +11,13 @@ class Option extends Model
     const TYPE_NUM = 'Numerical';
     const TYPE_STR = 'Short text';
     const TYPE_LON = 'Long text';
+    const TYPE_COL = 'Color';
 
     const VALUE_TYPES = [
         self::TYPE_NUM,
         self::TYPE_STR,
-        self::TYPE_LON
+        self::TYPE_LON,
+        self::TYPE_COL
     ];
 
     public function getSetValueAttribute() {

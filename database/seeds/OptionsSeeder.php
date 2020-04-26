@@ -92,6 +92,48 @@ class OptionsSeeder extends Seeder
             ],
 
             [
+                'key' => 'Primary Color',
+                'default' => '#56c8f3',
+                'value_type' =>Option::TYPE_COL
+            ],
+
+            [
+                'key' => 'Primary Text Color',
+                'default' => '#111111',
+                'value_type' =>Option::TYPE_COL
+            ],
+
+            [
+                'key' => 'Secondary Color',
+                'default' => '#0C2340',
+                'value_type' =>Option::TYPE_COL
+            ],
+
+            [
+                'key' => 'Secondary Text Color',
+                'default' => '#EEEEEE',
+                'value_type' =>Option::TYPE_COL
+            ],
+
+            [
+                'key' => 'Primary Button Color',
+                'default' => '#029ACF',
+                'value_type' =>Option::TYPE_COL
+            ],
+
+            [
+                'key' => 'Secondary Button Color',
+                'default' => '#434343',
+                'value_type' =>Option::TYPE_COL
+            ],
+
+            [
+                'key' => 'Danger Button Color',
+                'default' => '#ff0000',
+                'value_type' =>Option::TYPE_COL
+            ],
+
+            [
                 'key' => 'Maximum Rating',
                 'default' => 10,
                 'value_type' =>Option::TYPE_NUM

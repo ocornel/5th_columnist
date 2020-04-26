@@ -31,8 +31,20 @@
       <link rel="stylesheet" href="{{ asset('css/elephant.min.css')}}">
       <link rel="stylesheet" href="{{ asset('css/application.min.css')}}">
       <link rel="stylesheet" href="{{ asset('css/demo.min.css')}}">
-      @yield('additional_styles')
       <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+      @yield('additional_styles')
+      <style>
+          /* Option defined styles*/
+          * {
+              --primary-color: {{\App\Option::ValueByKey('Primary Color','var(--5c-blue)')}};
+              --primary-text-color: {{\App\Option::ValueByKey('Primary Text Color','var(--5c-dark-grey)')}};
+              --secondary-color: {{\App\Option::ValueByKey('Secondary Color','var(--5c-dark-blue')}};
+              --secondary-text-color: {{\App\Option::ValueByKey('Secondary Text Color','var(--5c-faint-grey)')}};
+              --primary-button-color: {{\App\Option::ValueByKey('Primary Button Color','var(--5c-light-grey)')}};
+              --secondary-button-color: {{\App\Option::ValueByKey('Secondary Button Color','var(--5c-dark-grey)')}};
+              --danger-button-color: {{\App\Option::ValueByKey('Danger Button Color','var(--5c-danger-red)')}};
+          }
+      </style>
       <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxy/1.6.1/scripts/jquery.ajaxy.min.js"></script>
   </head>

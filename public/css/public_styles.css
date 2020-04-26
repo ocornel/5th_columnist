@@ -6,7 +6,7 @@
 
 .category-card {
     height: var(--landing-category-card-height);
-    border: solid var(--5c-blue) 1px;
+    border: solid var(--primary-color) 1px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -28,7 +28,7 @@
     padding-top: 50px;
     min-height: calc(2* var(--landing-category-card-height));
     max-height: calc((2* var(--landing-category-card-height)) + 100px);
-    background-color: var(--5c-blue);
+    background-color: var(--primary-color);
 }
 
 .block-title {
@@ -55,7 +55,7 @@
 }
 
 .thick-underline {
-    border-bottom: solid var(--5c-blue) 2px;
+    border-bottom: solid var(--primary-color) 2px;
 }
 
 .category-list-item {
@@ -68,8 +68,8 @@
 }
 
 .border-botop {
-    border-top: solid var(--5c-blue) 1px;
-    border-bottom: solid var(--5c-blue) 1px;
+    border-top: solid var(--primary-color) 1px;
+    border-bottom: solid var(--primary-color) 1px;
 }
 
 .comment-box {
@@ -111,4 +111,9 @@
 
 a > .faint-border-bottom:hover, .faint-border-bottom > a:hover{
     background-color: var(--5c-faint-grey);
+}
+
+.footer {
+    background-color: var(--secondary-color);
+    color: var(--secondary-text-color);
 }

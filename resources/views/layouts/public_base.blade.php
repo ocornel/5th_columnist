@@ -32,8 +32,20 @@
     <link rel="stylesheet" href="{{ asset('css/landing-page.min.css')}}">
 {{--    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">--}}
 
-    @yield('additional_styles')
     <link href="{{ asset('css/public_styles.css') }}" rel="stylesheet">
+    @yield('additional_styles')
+    <style>
+        /* Option defined styles*/
+        * {
+            --primary-color: {{\App\Option::ValueByKey('Primary Color','var(--5c-blue)')}};
+            --primary-text-color: {{\App\Option::ValueByKey('Primary Text Color','var(--5c-dark-grey)')}};
+            --secondary-color: {{\App\Option::ValueByKey('Secondary Color','var(--5c-dark-blue')}};
+            --secondary-text-color: {{\App\Option::ValueByKey('Secondary Text Color','var(--5c-faint-grey)')}};
+            --primary-button-color: {{\App\Option::ValueByKey('Primary Button Color','var(--5c-light-grey)')}};
+            --secondary-button-color: {{\App\Option::ValueByKey('Secondary Button Color','var(--5c-dark-grey)')}};
+            --danger-button-color: {{\App\Option::ValueByKey('Danger Button Color','var(--5c-danger-red)')}};
+        }
+    </style>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxy/1.6.1/scripts/jquery.ajaxy.min.js"></script>
 </head>

@@ -1,9 +1,11 @@
 
 :root {
-    --5c-blue: #56c8f3;
-    --5c-dark-grey: #232323;
+    --5c-blue: #56C8F3;
+    --5c-dark-blue: #0C2340;
+    --5c-dark-grey: #111111;
     --5c-light-grey: #434343;
-    --5c-faint-grey: #eeeeee;
+    --5c-faint-grey: #EEEEEE;
+    --5c-danger-red: #EE1122;
     --h: 50;
 }
 
@@ -13,7 +15,7 @@
 }
 .card-link:hover {
     text-decoration: none;
-    color: var(--5c-blue);
+    color: var(--primary-color);
 }
 
 .image-bg {
@@ -62,4 +64,16 @@
 .fix-height-var {
     min-height: var(--h);
     max-height:var(--h);
+}
+
+.navbar-default .navbar-header {
+    background-color: var(--primary-color);
+}
+
+.layout-sidebar-backdrop {
+    background-color: var(--secondary-color);
+}
+
+.layout-sidebar {
+    background-color: var(--secondary-color);
 }
