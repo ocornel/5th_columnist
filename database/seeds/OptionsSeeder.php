@@ -105,7 +105,7 @@ class OptionsSeeder extends Seeder
 
             [
                 'key' => 'Secondary Color',
-                'default' => '#0C2340',
+                'default' => '#0D325B',
                 'value_type' =>Option::TYPE_COL
             ],
 

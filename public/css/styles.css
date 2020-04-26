@@ -1,7 +1,7 @@
 
 :root {
     --5c-blue: #56C8F3;
-    --5c-dark-blue: #0C2340;
+    --5c-dark-blue: #0D325B;
     --5c-dark-grey: #111111;
     --5c-light-grey: #434343;
     --5c-faint-grey: #EEEEEE;
@@ -66,8 +66,9 @@
     max-height:var(--h);
 }
 
-.navbar-default .navbar-header {
-    background-color: var(--primary-color);
+.navbar-default .navbar-brand {
+    background-color: white;
+    width: 100%;
 }
 
 .layout-sidebar-backdrop {
@@ -76,4 +77,19 @@
 
 .layout-sidebar {
     background-color: var(--secondary-color);
+}
+
+.navbar-brand {
+     padding: unset;
+    /*font-size: 18px;*/
+    /*line-height: unset;*/
+    /*height: 80px;*/
+}
+
+.navbar-brand-logo {
+    height: 50px;
+}
+
+.navbar-default {
+    background-color: var(--primary-color);
 }
