@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Menu;
+use App\MenuItem;
+use App\Page;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
@@ -15,10 +17,10 @@ class MenuController extends Controller
     public function menus()
     {
         $context = [
-            'menus'=>Menu::all(),
+            'menus' => Menu::all(),
+            'pages' => Page::all()
         ];
-        dd('Liss of menus coming here', $context);
-        return view('backend.menus.menus');
+        return view('backend.menus.menus', $context);
     }
 
     /**
@@ -34,18 +36,27 @@ class MenuController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store_menu(Request $request)
     {
-        //
+        $new_menu = Menu::create($request->all());
+        foreach ($request->page as $i => $page_id) {
+            MenuItem::create([
+                'menu_id' => $new_menu->id,
+                'page_id' => doubleval($page_id),
+                'label' => Page::find(doubleval($page_id))->title,
+            ]);
+        }
+//        todo success message
+        return redirect(route('menus'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Menu  $menu
+     * @param \App\Menu $menu
      * @return \Illuminate\Http\Response
      */
     public function show(Menu $menu)
@@ -56,10 +67,10 @@ class MenuController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Menu  $menu
+     * @param \App\Menu $menu
      * @return \Illuminate\Http\Response
      */
-    public function edit(Menu $menu)
+    public function edit_menu(Menu $menu)
     {
         //
     }
@@ -67,8 +78,8 @@ class MenuController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Menu  $menu
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Menu $menu
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Menu $menu)
@@ -79,11 +90,13 @@ class MenuController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Menu  $menu
-     * @return \Illuminate\Http\Response
+     * @param \App\Menu $menu
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function destroy(Menu $menu)
+    public function delete_menu(Menu $menu)
     {
-        //
+        $menu->delete();
+//        todo checks and message
+        return redirect(route('menus'));
     }
 }

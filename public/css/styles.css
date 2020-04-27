@@ -75,6 +75,10 @@
     background-color: var(--secondary-color);
 }
 
+.navbar-default .navbar-header {
+    background-color: white;
+}
+
 .layout-sidebar {
     background-color: var(--secondary-color);
 }
@@ -92,4 +96,51 @@
 
 .navbar-default {
     background-color: var(--primary-color);
+}
+
+.btn-primary {
+    background-color: var(--primary-button-color);
+    border-color:  var(--primary-button-color);
+    opacity: 85%;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-button-color);
+    border-color:  var(--primary-button-color);
+    opacity: 100%;
+}
+
+.btn-secondary {
+    background-color: var(--secondary-button-color);
+    border-color:  var(--secondary-button-color);
+    color: white;
+    opacity: 85%;
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-button-color);
+    border-color:  var(--secondary-button-color);
+    opacity: 100%;
+}
+
+.btn-danger {
+    background-color: var(--danger-button-color);
+    border-color:  var(--danger-button-color);
+    opacity: 85%;
+}
+
+.btn-danger:hover {
+    background-color: var(--danger-button-color, #FF0000);
+    border-color:  var(--danger-button-color, #ff0000);
+    opacity: 100%;
+}
+
+.columns-var {
+    column-count: var(--columns);
+    column-rule: 1px solid var(--5c-faint-grey, #D3D3D3);
+}
+
+.max-height-var{
+    max-height: var(--max-height, 300px);
+    overflow-y: auto;
 }

@@ -60,7 +60,7 @@ class DummyData extends Seeder
 
         # PAGES
         if ($this->command) $this->command->info('Creating Dummy Pages');
-        factory(Page::class, 10)->create();
+        factory(Page::class, 30)->create();
 
         # MENUS
         if ($this->command) $this->command->info('Creating Dummy Menus');

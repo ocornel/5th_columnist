@@ -134,6 +134,11 @@ class BlogController extends Controller
         return view('public.load_tag', $context);
     }
 
+    public function template_code(Request $request) {
+//        return $request->context;
+        return view(   "$request->template", $request->context)->renderSections();
+    }
+
     public function DeleteAll() {
         foreach (Role::all() as $item) $item->delete();
         foreach (Category::all() as $item) $item->delete();

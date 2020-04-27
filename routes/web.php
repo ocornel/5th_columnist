@@ -27,8 +27,9 @@ Route ::post('post_comment/{post}', 'BlogController@post_comment')->name('post_c
 Route ::get('author_{user}/{author_name?}', 'BlogController@load_author')->name('load_author');
 Route ::get('cat_{category}/{category_name?}/{post_id?}/', 'BlogController@load_category')->name('load_category');
 Route ::get('tag_{tag}/{tag_name?}/', 'BlogController@load_tag')->name('load_tag');
-Route::get('prepare_dummy', 'BlogController@prepare_dummy')->name('prepare_dummy'); # todo move this to admin side once done
-Route::get('delete_dummy', 'BlogController@delete_dummy')->name('delete_dummy'); # todo move this to admin side once done
+Route::get('prepare_dummy', 'BlogController@prepare_dummy')->name('prepare_dummy');
+Route::get('delete_dummy', 'BlogController@delete_dummy')->name('delete_dummy');
+Route::get('template_code', 'BlogController@template_code')->name('template_code');
 
 
 Auth::routes();
@@ -38,10 +39,18 @@ Route::get('/charts', 'HomeController@charts')->name('charts');
 Route::get('/reports', 'HomeController@reports')->name('reports');
 
 # PAGES
-Route::get('/pages}', 'PageController@pages')->name('pages');
+Route::get('/pages', 'PageController@pages')->name('pages');
+Route::get('/create_page', 'PageController@create_page')->name('create_page');
+Route::get('/show_page/{page}/{page_name?}', 'PageController@show_page')->name('show_page');
+Route::get('/edit_page/{page}/{page_name?}', 'PageController@edit_page')->name('edit_page');
+Route::get('/delete_page/{page}', 'PageController@delete_page')->name('delete_page');
 
 # MENUS
 Route::get('/menus', 'MenuController@menus')->name('menus');
+Route::post('/store_menu', 'MenuController@store_menu')->name('store_menu');
+Route::get('/edit_menu/{menu}/{menu_name?}', 'MenuController@edit_menu')->name('edit_menu');
+Route::get('/delete_menu/{menu}', 'MenuController@delete_menu')->name('delete_menu');
+
 
 # CATEGORIES
 Route::get('/categories/{status?}', 'CategoryController@categories')->name('categories');
@@ -60,6 +69,7 @@ Route::get('/roles', 'RoleController@roles')->name('roles');
 
 # USERS
 Route::get('/users/{role?}', 'UserController@users')->name('users');
+Route::get('/show_user/{user}/{user_name?}', 'UserController@show_user')->name('show_user');
 
 # OPTIONS
 Route::get('/settings/{type?}', 'OptionController@options')->name('options');

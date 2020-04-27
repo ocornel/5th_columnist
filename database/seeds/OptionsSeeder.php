@@ -123,7 +123,7 @@ class OptionsSeeder extends Seeder
 
             [
                 'key' => 'Secondary Button Color',
-                'default' => '#434343',
+                'default' => '#0D325B',
                 'value_type' =>Option::TYPE_COL
             ],
 

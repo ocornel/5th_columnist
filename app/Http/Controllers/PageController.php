@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,8 +22,7 @@ class PageController extends Controller
         $context = [
             'pages'=>Page::all(),
         ];
-        dd('Liss of pages coming here', $context);
-        return view('backend.pages.pages');
+        return view('backend.pages.pages', $context);
     }
 
     /**
@@ -26,9 +30,9 @@ class PageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create_page()
     {
-        //
+        dd('Tool for creating new page comes here.');
     }
 
     /**
@@ -48,9 +52,12 @@ class PageController extends Controller
      * @param  \App\Page  $page
      * @return \Illuminate\Http\Response
      */
-    public function show(Page $page)
+    public function show_page(Page $page)
     {
-        //
+        $context = [
+            'page'=>$page
+        ];
+        dd('Page details coming here', $context);
     }
 
     /**
@@ -59,9 +66,13 @@ class PageController extends Controller
      * @param  \App\Page  $page
      * @return \Illuminate\Http\Response
      */
-    public function edit(Page $page)
+    public function edit_page(Page $page)
     {
-        //
+        $context = [
+            'page' =>$page
+        ];
+
+        dd('Editing page tool coming here', $context);
     }
 
     /**
@@ -80,10 +91,12 @@ class PageController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Page  $page
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function destroy(Page $page)
+    public function delete_page(Page $page)
     {
-        //
+        $page->delete();
+//        todo create message
+        return redirect(route('pages'));
     }
 }

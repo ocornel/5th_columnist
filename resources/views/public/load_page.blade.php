@@ -15,9 +15,9 @@
                 @auth()
                     <span class="pull-right">
                         @if(Auth::user()->actionCan('Create Page'))
-                            <a href="" class="text-warning" title="Edit Page"><i class="fa fa-edit"></i></a>
+                            <a href="{{ route('edit_page', [$page, $page->name]) }}" class="text-warning" title="Edit Page"><i class="fa fa-edit"></i></a>
                             &nbsp;
-                            <a href="" class="text-danger" title="Trash Page"><i class="fa fa-trash"></i></a>
+                            <a href="{{ route('delete_page', [$page]) }}" class="text-danger" title="Trash Page"><i class="fa fa-trash"></i></a>
                         @endif
                     </span>
                 @endauth
