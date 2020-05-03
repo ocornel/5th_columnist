@@ -63,9 +63,10 @@
             </div>
             <div class="title-bar">
                 <h1 class="title-bar-title">
-                    <span class="d-ib">@yield('title')</span>
+                    <span class="d-ib text-capitalize">@yield('title')</span>
                     <div class="pull-right">
                         @yield('page_actions')
+                        <span onClick="history.go(-1);" class="btn btn-primary">BACK</span>
                     </div>
                 </h1>
             </div>

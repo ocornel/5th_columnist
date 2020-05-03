@@ -87,3 +87,7 @@ $(document).ready(function () {
     );
 });
 
+function linkText(input_string) {
+    return input_string.replace(/ /g, '-').toLowerCase();
+}
+

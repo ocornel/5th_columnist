@@ -41,6 +41,7 @@ Route::get('/reports', 'HomeController@reports')->name('reports');
 # PAGES
 Route::get('/pages', 'PageController@pages')->name('pages');
 Route::get('/create_page', 'PageController@create_page')->name('create_page');
+Route::post('/store_page', 'PageController@store_page')->name('store_page');
 Route::get('/show_page/{page}/{page_name?}', 'PageController@show_page')->name('show_page');
 Route::get('/edit_page/{page}/{page_name?}', 'PageController@edit_page')->name('edit_page');
 Route::get('/delete_page/{page}', 'PageController@delete_page')->name('delete_page');
