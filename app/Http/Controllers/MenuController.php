@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Menu;
 use App\MenuItem;
 use App\Page;
@@ -9,6 +10,11 @@ use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,10 +23,9 @@ class MenuController extends Controller
     public function menus()
     {
         $context = [
-            'menus' => Menu::all(),
-            'pages' => Page::all()
+            'categories' => Category::all(),
         ];
-        return view('backend.menus.menus', $context);
+        return view('backend.categories.categories', $context);
     }
 
     /**
@@ -72,7 +77,7 @@ class MenuController extends Controller
      */
     public function edit_menu(Menu $menu)
     {
-        //
+        dd('Edit Menu page coming here.', $menu);
     }
 
     /**

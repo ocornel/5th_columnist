@@ -12,11 +12,24 @@ class Category extends Model
     const STATUS_ACTIVE = "Active";
     const STATUS_DEACTIVATED = "Deactivated";
 
+    const STATUSES = [
+        self::STATUS_ACTIVE=>"Active Status",
+        self::STATUS_DEACTIVATED=>"Inactive Status",
+    ];
+
     const UNCATEGORIEZED = "No Category";
 
     public function getPostsAttribute()
     {
         return Post::where('category_id', $this->id)->orderby('id', 'DESC')->get();
+    }
+
+    public function getPostsArrayAttribute() {
+        $posts = [];
+        foreach ($this->posts as $post) {
+            array_push($posts, $post);
+        }
+        return $posts;
     }
 
     public function LatestPosts($take = null)

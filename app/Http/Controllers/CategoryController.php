@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller
 {
@@ -16,31 +18,42 @@ class CategoryController extends Controller
     {
         $context = [
             'categories'=>Category::all()->groupBy('status'),
-            'tab'=> $status
+            'tab'=> $status == null? Category::STATUS_ACTIVE : $status
         ];
-        dd('Categories page coming here', $context);
-        return view('backend.categories.categories');
+        return view('backend.categories.categories', $context);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
-        //
+        $context = [
+            'posts' => Post::whereIn('category_id', [null, Category::where('name', Category::UNCATEGORIEZED)->first()->id])->get()
+        ];
+        return view('backend.categories.create_category', $context);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
     {
-        //
+//        todo perform validation
+        $new_category = Category::create($request->all());
+        if (isset($request->posts)) {
+            foreach ($request->posts as $post_id) {
+                Post::find(intval($post_id))->update(['category_id'=>$new_category->id]);
+            }
+        }
+        $new_category->resolveStuff();
+        Session::flash("success", 'New Category successfully created.');
+        return redirect(route('categories', $new_category->status));
     }
 
     /**

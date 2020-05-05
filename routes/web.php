@@ -56,6 +56,12 @@ Route::get('/delete_menu/{menu}', 'MenuController@delete_menu')->name('delete_me
 
 # CATEGORIES
 Route::get('/categories/{status?}', 'CategoryController@categories')->name('categories');
+Route::get('/create_category', 'CategoryController@create')->name('create_category');
+Route::post('/store_category', 'CategoryController@store')->name('store_category');
+Route::post('/update_category/{category}', 'CategoryController@update')->name('update_category');
+Route::get('/show_category/{category}/{category_name?}', 'CategoryController@show')->name('show_category');
+Route::get('/edit_category/{category}/{category_name?}', 'CategoryController@edit')->name('edit_category');
+Route::get('/delete_category/{category}', 'CategoryController@destroy')->name('delete_category');
 
 # TAGS
 Route::get('/tags', 'TagController@tags')->name('tags');

@@ -45,7 +45,7 @@
                 <div class="form-group">
                     <label for="comment_content" class="control-label">Comment</label>
                     <textarea id="comment_content" class="form-control public-editor" name="content"
-                              rows="3" required aria-required="true"> {{ $page->content }} </textarea>
+                              rows="3" required aria-required="true">@isset($page) {{ $page->content }} @endisset</textarea>
                     <small class="help-block">Type in page content using the editor. Media, Formatting, HTML code
                         allowed.</small>
                 </div>
