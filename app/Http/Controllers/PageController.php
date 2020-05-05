@@ -6,6 +6,7 @@ use App\Menu;
 use App\MenuItem;
 use App\Page;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PageController extends Controller
 {
@@ -59,6 +60,7 @@ class PageController extends Controller
                 ]);
             }
         }
+        Session::flash("success", 'New Page successfully created.');
         return redirect(route('pages'));
     }
 
@@ -66,29 +68,29 @@ class PageController extends Controller
      * Display the specified resource.
      *
      * @param \App\Page $page
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show_page(Page $page)
     {
         $context = [
             'page' => $page
         ];
-        dd('Page details coming here', $context);
+        return view('backend.pages.show_page', $context);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param \App\Page $page
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit_page(Page $page)
     {
         $context = [
-            'page' => $page
+            'page' => $page,
+            'menus' => Menu::all()
         ];
-
-        dd('Editing page tool coming here', $context);
+        return view('backend.pages.create_page', $context);
     }
 
     /**
@@ -96,11 +98,23 @@ class PageController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param \App\Page $page
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(Request $request, Page $page)
+    public function update_page(Request $request, Page $page)
     {
-        //
+        $page->update($request->all());
+        foreach (MenuItem::where('page_id', $page->id)->get() as $item) $item->delete();
+        if (isset($request->menus)) {
+            foreach ($request->menus as $menu_id) {
+                MenuItem::create([
+                    'menu_id' => intval($menu_id),
+                    'label' => $page->title,
+                    'page_id' => $page->id
+                ]);
+            }
+        }
+        Session::flash("success", 'Page details successfully updated.');
+        return redirect(route('show_page', [$page, $page->name]));
     }
 
     /**
@@ -112,7 +126,7 @@ class PageController extends Controller
     public function delete_page(Page $page)
     {
         $page->delete();
-//        todo create message
+        Session::flash("success", 'Page deleted successfully.');
         return redirect(route('pages'));
     }
 }

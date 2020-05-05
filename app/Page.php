@@ -11,6 +11,18 @@ class Page extends Model
         'title', 'created_by', 'content', 'name', 'view_count', 'description'
     ];
 
+    public function getAuthorAttribute() {
+        return User::find($this->created_by);
+    }
+
+    public function getMenusAttribute() {
+        $menus = [];
+        foreach (MenuItem::where('page_id', $this->id)->get() as $item) {
+            array_push($menus, $item->menu);
+        }
+        return $menus;
+    }
+
     public static function RandomPageName() {
         $name = Utils::random_string(7,'l');
         try {
@@ -24,10 +36,6 @@ class Page extends Model
         }
 
         return $name;
-    }
-
-    public function getAuthorAttribute() {
-        return User::find($this->created_by);
     }
 
     public function resolveName()
