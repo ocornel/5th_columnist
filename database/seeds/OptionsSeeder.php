@@ -139,6 +139,12 @@ class OptionsSeeder extends Seeder
                 'value_type' =>Option::TYPE_NUM
             ],
 
+            [
+                'key' => 'Default Font Size',
+                'default' => 16,
+                'value_type' =>Option::TYPE_NUM
+            ],
+
         );
 
         foreach ($options_array as $option) {

@@ -68,6 +68,12 @@ Route::get('/tags', 'TagController@tags')->name('tags');
 
 # POSTS
 Route::get('/posts/{status?}/{category?}', 'PostController@posts')->name('posts');
+Route::get('/create_post', 'PostController@create')->name('create_post');
+Route::post('/store_post', 'PostController@store')->name('store_post');
+Route::post('/update_post/{post}', 'PostController@update')->name('update_post');
+Route::get('/show_post/{post}/{post_name?}', 'PostController@show')->name('show_post');
+Route::get('/edit_post/{post}/{post_name?}', 'PostController@edit')->name('edit_post');
+Route::get('/delete_post/{post}', 'PostController@destroy')->name('delete_post');
 
 # COMMENTS
 Route::get('/comments/{status?}', 'CommentController@comments')->name('comments');

@@ -37,6 +37,7 @@
     <style>
         /* Option defined styles*/
         * {
+            --default-font-size: {{\App\Option::ValueByKey('Default Font Size','var(--5c-default-font-size)')}};
             --primary-color: {{\App\Option::ValueByKey('Primary Color','var(--5c-blue)')}};
             --primary-text-color: {{\App\Option::ValueByKey('Primary Text Color','var(--5c-dark-grey)')}};
             --secondary-color: {{\App\Option::ValueByKey('Secondary Color','var(--5c-dark-blue')}};

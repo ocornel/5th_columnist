@@ -10,7 +10,7 @@
 <div class="card">
     <div class="card-header"><h5>Pages created</h5></div>
     <div class="card-body">
-        @component('backend.components.table_pages', ['pages'=>$pages, 'actions'=>true])@endcomponent
+        @component('backend.components.table_pages', ['pages'=>$pages, 'actions'=>true, 'character_limit'=>35])@endcomponent
     </div>
 </div>
 @endsection

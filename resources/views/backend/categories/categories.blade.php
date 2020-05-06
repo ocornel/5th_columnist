@@ -26,11 +26,11 @@
 
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade in  @if($tab == \App\Category::STATUS_ACTIVE)active @endif" id="active_categories">
-                    @component('backend.components.table_categories', ['categories' => $categories[\App\Category::STATUS_ACTIVE], 'actions'=>true])
+                    @component('backend.components.table_categories', ['categories' => @$categories[\App\Category::STATUS_ACTIVE], 'actions'=>true])
                     @endcomponent
                 </div>
                 <div role="tabpanel" class="tab-pane fade in  @if($tab == \App\Category::STATUS_DEACTIVATED)active @endif" id="deactivated_categories">
-                    @component('backend.components.table_categories', ['categories' => $categories[\App\Category::STATUS_DEACTIVATED], 'actions'=>true])
+                    @component('backend.components.table_categories', ['categories' => @$categories[\App\Category::STATUS_DEACTIVATED], 'actions'=>true])
                     @endcomponent
                 </div>
             </div>

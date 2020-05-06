@@ -31,7 +31,7 @@ class CreatePostsTable extends Migration
             $table->float('rating')->default(0.0);
             $table->string('tags')->nullable();
             $table->string('feature_image')->nullable();
-            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->timestamps();
 
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');;;

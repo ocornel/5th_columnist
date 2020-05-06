@@ -17,7 +17,7 @@
                         <thead>
                         <tr>
                             <th>MENU NAME</th>
-                            <th class="text-right">ITEMS COUNT</th>
+                            <th class="text-right">ITEMS</th>
                             <th>ACTIONS</th>
                         </tr>
                         </thead>
@@ -28,8 +28,8 @@
                                 <td class="text-right">{{ number_format($menu->items->count()) }}</td>
                                 <td>
                                     <a href="{{ route('edit_menu', [$menu, $menu->name]) }}" title="Edit"
-                                       class="btn btn-secondary"><i class="fa fa-edit"></i></a>
-                                    <a href="{{ route('delete_menu', [$menu]) }}" title="Delete" class="btn btn-danger"><i
+                                       class="btn-sm btn-secondary"><i class="fa fa-edit"></i></a>
+                                    <a href="{{ route('delete_menu', [$menu]) }}" title="Delete" class="btn-sm btn-danger"><i
                                             class="fa fa-trash"></i></a>
                             </tr>
                         @endforeach

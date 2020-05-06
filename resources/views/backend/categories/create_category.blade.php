@@ -30,9 +30,9 @@
                         <div class="form-group">
                             <label for="status" class="control-label">Status</label>
                             <select name="status" id="status" class="form-control">
-                                <option value=""> -- Select status --</option>
+{{--                                <option value=""> -- Select status --</option>--}}
                                 @foreach(\App\Category::STATUSES as $status => $label)
-                                    <option value="{{ $status }}">{{ $label }}</option>
+                                    <option value="{{ $status }}" @isset($category) @if($category->status == $status) selected @endif @endisset>{{ $label }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -44,8 +44,18 @@
                     <small class="help-block">Brief description of content for Search Engine Optimization</small>
                 </div>
                 <div class="form-group">
-                    <label for="comment_content" class="control-label">Uncategorised Posts to map to this category</label>
+                    <p><label for="comment_content" class="control-label">Posts to map to this category </label>
+
+                    </p>
+                    <label class="custom-control custom-control-primary custom-checkbox">
+                        <input class="custom-control-input" type="checkbox"
+                               oninput="selectAll(this)"
+                        >
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-label"><b>Select All</b></span>
+                    </label><br>
                     <div class="columns-var" style="--columns:3">
+
                         @foreach($posts as $post)
                             <label class="custom-control custom-control-primary custom-checkbox">
                                 <input class="custom-control-input" type="checkbox" name="posts[]"
@@ -73,6 +83,13 @@
     <script>
         function labelPosts(input) {
             document.getElementById('cat_name').innerText = input;
+        }
+
+        function selectAll(checkbox) {
+            var targets = document.getElementsByName('posts[]');
+            for (i = 0; i < targets.length; i++) {
+                targets[i].checked = checkbox.checked;
+            }
         }
     </script>
 @endsection

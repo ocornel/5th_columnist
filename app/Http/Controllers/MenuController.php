@@ -7,6 +7,7 @@ use App\Menu;
 use App\MenuItem;
 use App\Page;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class MenuController extends Controller
 {
@@ -23,9 +24,10 @@ class MenuController extends Controller
     public function menus()
     {
         $context = [
-            'categories' => Category::all(),
+            'menus' => Menu::all(),
+            'pages' => Page::all()
         ];
-        return view('backend.categories.categories', $context);
+        return view('backend.menus.menus', $context);
     }
 
     /**
@@ -54,7 +56,7 @@ class MenuController extends Controller
                 'label' => Page::find(doubleval($page_id))->title,
             ]);
         }
-//        todo success message
+        Session::flash("success", 'New Menu successfully created.');
         return redirect(route('menus'));
     }
 
@@ -77,6 +79,7 @@ class MenuController extends Controller
      */
     public function edit_menu(Menu $menu)
     {
+//        TODO edit menu
         dd('Edit Menu page coming here.', $menu);
     }
 
@@ -101,7 +104,7 @@ class MenuController extends Controller
     public function delete_menu(Menu $menu)
     {
         $menu->delete();
-//        todo checks and message
+        Session::flash("success", 'Menu successfully deleted.');
         return redirect(route('menus'));
     }
 }
