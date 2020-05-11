@@ -33,6 +33,7 @@ class Post extends Model
 
     public function getFeatureImageUrlAttribute()
     {
+//        TODO Resolve uploaded images for posts
         if ($this->feature_image) {
             return URL::to('storage/' . $this->feature_image);
         }
@@ -77,8 +78,18 @@ class Post extends Model
         return true;
     }
 
+    public function resolveTags() {
+        $tag_names = explode(',', $this->tags);
+        foreach ($tag_names as $name) {
+            Tag::updateOrCreate([
+                'name' => strtolower($name)]);
+        }
+        return true;
+    }
+
     public function resolveStuff()
     {
+        $this->resolveTags();
         $this->resolveName();
         $this->resolveCommentCount();
         $this->resolvePublishDate();
@@ -99,17 +110,17 @@ class Post extends Model
 
     public function getTagListAttribute()
     {
-        $tag_ids = explode(',', $this->tags);
-        return Tag::whereIn('id', $tag_ids)->get();
+        $tag_names = explode(',', $this->tags);
+        return Tag::whereIn('name', $tag_names)->get();
     }
 
     public function getRelatedPostsAttribute()
     {
         # Related posts are of the same category and share tags.
         return Post::where('status', self::STATUS_PUBLISHED)->where('category_id', $this->category_id)->get()->filter(function ($post) {
-            $post_tag_ids = explode(',', $post->tags);
-            $this_tag_ids = explode(',', $this->tags);
-            return (sizeof(array_intersect($post_tag_ids, $this_tag_ids)) > 0);
+            $post_tag_names = explode(',', $post->tags);
+            $this_tag_names = explode(',', $this->tags);
+            return (sizeof(array_intersect($post_tag_names, $this_tag_names)) > 0);
         });
     }
 

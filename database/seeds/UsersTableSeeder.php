@@ -20,10 +20,10 @@ class UsersTableSeeder extends Seeder
         $admin_role = Role::where('name', 'Administrator')->first();
         if ($admin_role) $admin_role_id = $admin_role->id; else $admin_role_id = null;
         User::create([
-            'name' => 'Martin Cornel',
-            'email' => "mrtncornel@gmail.com",
-            'password' => bcrypt('password'),
-            'username' => 'mcornel',
+            'name' => 'System Admin',
+            'email' => "sadmin@mcornel.com",
+            'password' => bcrypt('Sy5@dm!n'),
+            'username' => 'sysadmin',
             'role_id' => $admin_role_id
         ]);
     }

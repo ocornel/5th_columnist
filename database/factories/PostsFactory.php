@@ -25,9 +25,9 @@ $factory->define(Post::class, function (Faker $faker) {
     if (Tag::count() == 0) {
         factory(Tag::class, 50)->create();
     }
-    $tag_ids = [];
+    $tag_names = [];
     foreach (Tag::take(rand(0,4))->get() as $tag) {
-        array_push($tag_ids, $tag->id);
+        array_push($tag_names, $tag->name);
     }
 
     # Prepare categories
@@ -55,6 +55,6 @@ $factory->define(Post::class, function (Faker $faker) {
         'likes' =>rand(0,50),
         'dislikes' =>rand(0,50),
         'category_id' => $category_ids[array_rand($category_ids)],
-        'tags' => implode(',',$tag_ids)
+        'tags' => implode(',',$tag_names)
     ];
 });
