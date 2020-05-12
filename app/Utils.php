@@ -123,6 +123,13 @@ class Utils extends Model
         return URL::to('img/fallback_images/'.$fallback_image_options[array_rand($fallback_image_options)]);
     }
 
+    public static function safeDivide($numerator, $denominator, $precision=2) {
+        if ($denominator == 0) {
+            return 0;
+        }
+        return round(($numerator/$denominator),$precision);
+    }
+
     public static function ResolveStuff() {
         # resolve Comments
         foreach (Comment::all() as $item) {

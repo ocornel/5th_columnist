@@ -30,7 +30,7 @@ class Comment extends Model
     public function resolveRating() {
         $max = intval(Option::ValueByKey('Maximum Rating', 100));
         $this->update([
-            'rating' => round($max * ($this->likes /($this->likes + $this->dislikes)),2)
+            'rating' => round($max * Utils::safeDivide($this->likes,($this->likes + $this->dislikes),6),2)
         ]);
     }
 
