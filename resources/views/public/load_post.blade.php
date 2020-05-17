@@ -13,7 +13,7 @@
         <div class="container text-left post-container">
             <div class="row">
                 <div class="col-md-9">
-                    <h2 class="block-title thick-underline">{{ $post->title }}
+                    <h2 class="thick-underline">{{ $post->title }}
                         @auth()
                             <span class="pull-right">
                                 @if(Auth::user()->actionCan('Publish Post'))

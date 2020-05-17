@@ -10,7 +10,8 @@ class Tag extends Model
 
     public function getPostsAttribute() {
         return Post::where('status', '!=', Post::STATUS_DELETED)->get()->filter(function ($post) {
-            return in_array($this->name, explode(',', $post->tags));
+            return in_array(strtolower($this->name), explode(',', strtolower($post->tags)));
+//            return true;
         });
     }
 

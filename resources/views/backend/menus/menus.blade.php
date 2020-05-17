@@ -23,7 +23,7 @@
                         </thead>
                         <tbody>
                         @foreach($menus as $menu)
-                            <tr onclick="showMenu({{$menu}}, {{$menu->items}})">
+                            <tr onclick="showMenu({{$menu->id}})">
                                 <td>{{ $menu->name }}</td>
                                 <td class="text-right">{{ number_format($menu->items->count()) }}</td>
                                 <td>
@@ -31,6 +31,7 @@
                                        class="btn-sm btn-secondary"><i class="fa fa-edit"></i></a>
                                     <a href="{{ route('delete_menu', [$menu]) }}" title="Delete" class="btn-sm btn-danger"><i
                                             class="fa fa-trash"></i></a>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -93,16 +94,14 @@
             tool_area.innerHTML = document.getElementById('create_menu_form').innerHTML;
         }
 
-        function showMenu(menu, items) {
-            console.log(menu);
+        function showMenu(menu_id) {
             $.get("{{route('template_code')}}",
                 {
                     template: 'backend.components.menu_items_show',
-                    context:{'menu':menu, 'items':items},
+                    context:{'menu_id':menu_id},
                 },
 
                 function (data, status) {
-                console.log(data);
                     tool_area.innerHTML = data.content;
                 },
                 'json'

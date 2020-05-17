@@ -8,6 +8,6 @@ use Faker\Generator as Faker;
 
 $factory->define(Tag::class, function (Faker $faker) {
     return [
-        'name' => Utils::getWords(1),
+        'name' => Utils::getWords(rand(1,3)),
     ];
 });

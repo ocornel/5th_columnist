@@ -145,7 +145,6 @@ class BlogController extends Controller
 
     public function template_code(Request $request)
     {
-//        return $request->context;
         return view("$request->template", $request->context)->renderSections();
     }
 

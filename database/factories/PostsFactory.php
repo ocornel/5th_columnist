@@ -26,7 +26,7 @@ $factory->define(Post::class, function (Faker $faker) {
         factory(Tag::class, 50)->create();
     }
     $tag_names = [];
-    foreach (Tag::take(rand(0,4))->get() as $tag) {
+    foreach (Tag::all()->random(rand(1,4)) as $tag) {
         array_push($tag_names, $tag->name);
     }
 
