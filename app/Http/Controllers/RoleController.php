@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class RoleController extends Controller
 {
@@ -36,11 +37,13 @@ class RoleController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store_role(Request $request)
     {
-        //
+        Role::create($request->all());
+        Session::flash('success', 'Role Created.');
+        return redirect(route('roles'));
     }
 
     /**

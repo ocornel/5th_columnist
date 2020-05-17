@@ -83,19 +83,19 @@ Route::get('/delete_comment/{comment}/{status?}', 'CommentController@destroy')->
 
 # ROLES
 Route::get('/roles', 'RoleController@roles')->name('roles');
-Route::post('/store_role', 'MenuController@store_role')->name('store_role');
-Route::get('/show_role/{role}/{role_name?}', 'MenuController@show_role')->name('show_role');
-Route::get('/edit_role/{role}/{role_name?}', 'MenuController@edit_role')->name('edit_role');
-Route::post('/update_role/{role}', 'MenuController@update_role')->name('update_role');
-Route::get('/activate_role/{comment}/{status?}', 'CommentController@activate_role')->name('activate_role');
-Route::get('/deactivate_role/{comment}/{status?}', 'CommentController@deactivate_role')->name('deactivate_role');
-Route::get('/delete_role/{comment}/{status?}', 'CommentController@destroy')->name('delete_role');
+Route::post('/store_role', 'RoleController@store_role')->name('store_role');
+Route::get('/show_role/{role}/{role_name?}', 'RoleController@show_role')->name('show_role');
+Route::get('/edit_role/{role}/{role_name?}', 'RoleController@edit_role')->name('edit_role');
+Route::post('/update_role/{role}', 'RoleController@update_role')->name('update_role');
+Route::get('/activate_role/{role}/{status?}', 'CommentController@activate_role')->name('activate_role');
+Route::get('/deactivate_role/{role}/{status?}', 'CommentController@deactivate_role')->name('deactivate_role');
+Route::get('/delete_role/{role}/{status?}', 'CommentController@destroy')->name('delete_role');
 
 # USERS
 Route::get('/users/{role?}', 'UserController@users')->name('users');
 Route::get('/show_user/{user}/{user_name?}', 'UserController@show_user')->name('show_user');
-Route::get('/edit_user/{user}/{user_name?}', 'MenuController@edit_user')->name('edit_user');
-Route::post('/update_user/{user}', 'MenuController@update_user')->name('update_user');
+Route::get('/edit_user/{user}/{user_name?}', 'UserController@edit_user')->name('edit_user');
+Route::post('/update_user/{user}', 'UserController@update_user')->name('update_user');
 Route::get('/delete_user/{user}', 'CommentController@destroy')->name('delete_user');
 
 # OPTIONS

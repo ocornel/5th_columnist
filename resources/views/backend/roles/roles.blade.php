@@ -50,9 +50,12 @@
             <div class="form-group">
                 <label for="name" class="control-label">Role Name</label>
                 <input id="name" class="form-control" style="width: 50%" type="text" name="name" required="" aria-required="true">
-                <small class="help-block">Displayed before listing menu items.</small>
             </div>
-            <label class="control-label">Pages to include as menu items</label><br>
+            <div class="form-group">
+                <label for="description" class="control-label">Role Description</label>
+                <textarea id="description" class="form-control" name="description" ></textarea>
+                <small class="help-block">Briefly describe the role.</small>
+            </div>
 
             <div class="form-group" align="right">
                 <button type="submit" class="btn btn-primary ">Save Changes</button>
