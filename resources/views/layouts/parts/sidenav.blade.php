@@ -91,7 +91,7 @@
                                         {{ \App\Post::STATUS_DRAFT }}</a></li>
                             @endif
                             <li><a href="{{ route('comments',\App\Comment::STATUS_APPROVED) }}">{{ \App\Comment::STATUS_APPROVED }}</a></li>
-                            <li><a href="{{ route('comments',\App\Comment::STATUS_DELETED) }}">{{ \App\Comment::STATUS_DELETED }}</a></li>
+                            <li><a href="{{ route('comments',\App\Comment::STATUS_DECLINED) }}">{{ \App\Comment::STATUS_DECLINED }}</a></li>
                         </ul>
                     </li>
 

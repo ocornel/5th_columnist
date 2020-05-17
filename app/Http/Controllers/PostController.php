@@ -66,7 +66,7 @@ class PostController extends Controller
         $post->save();
 
         $post->resolveStuff();
-        Session::flash('success', 'Contact saved');
+        Session::flash('success', 'Post created');
         return redirect(route('posts', [$post->status, $post->category_name]));
     }
 

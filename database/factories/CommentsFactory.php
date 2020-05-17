@@ -38,7 +38,7 @@ $factory->define(Comment::class, function (Faker $faker) {
         }
     }
 
-    $comment_statuses = [Comment::STATUS_DRAFT, Comment::STATUS_APPROVED, Comment::STATUS_DELETED];
+    $comment_statuses = [Comment::STATUS_DRAFT, Comment::STATUS_APPROVED, Comment::STATUS_DECLINED];
     return [
         'post_id' => $post_ids[array_rand($post_ids)],
         'content' => Utils::getWords(rand(3, 30)),

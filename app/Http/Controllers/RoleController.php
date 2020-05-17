@@ -15,10 +15,10 @@ class RoleController extends Controller
     public function roles()
     {
         $context = [
-            'roles'=>Role::all()->groupBy('status'),
+            'roles_by_status'=>Role::all()->groupBy('status'),
+            'tab'=>null
         ];
-        dd('roles page coming here', $context);
-        return view('backend.roles.roles');
+        return view('backend.roles.roles', $context);
     }
 
 

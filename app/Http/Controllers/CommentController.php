@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CommentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,13 +20,29 @@ class CommentController extends Controller
      */
     public function comments($status = null)
     {
-        $comments = $status? Comment::whereStatus($status)->get(): Comment::all();
         $context = [
-            'comment_by_status'=>$comments->groupBy('status'),
-            'tab'=> $status
+            'comments_by_status' => $status ? Comment::whereStatus($status)->get()->groupBy('status') : Comment::all()->groupBy('status'),
+            'tab' => $status
         ];
-        dd('Stories page coming here', $context);
-        return view('backend.comments.comments');
+        return view('backend.comments.comments', $context);
+    }
+
+    public function approve_comment(Comment $comment, $status=null)
+    {
+        if ($comment) {
+            $comment->update(['status' => Comment::STATUS_APPROVED]);
+        }
+        Session::flash('success', 'Comment Approved.');
+        return redirect(route('comments', $status));
+    }
+
+    public function decline_comment(Comment $comment, $status=null)
+    {
+        if ($comment) {
+            $comment->update(['status' => Comment::STATUS_DECLINED]);
+        }
+        Session::flash('success', 'Comment Declined.');
+        return redirect(route('comments', $status));
     }
 
     /**
@@ -30,13 +52,13 @@ class CommentController extends Controller
      */
     public function create()
     {
-        //
+        //x
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -47,7 +69,7 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Comment  $comment
+     * @param \App\Comment $comment
      * @return \Illuminate\Http\Response
      */
     public function show(Comment $comment)
@@ -58,7 +80,7 @@ class CommentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Comment  $comment
+     * @param \App\Comment $comment
      * @return \Illuminate\Http\Response
      */
     public function edit(Comment $comment)
@@ -69,8 +91,8 @@ class CommentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Comment  $comment
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Comment $comment
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Comment $comment)
@@ -81,11 +103,18 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Comment  $comment
-     * @return \Illuminate\Http\Response
+     * @param \App\Comment $comment
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
      */
     public function destroy(Comment $comment)
     {
-        //
+        $status = $comment->status;
+        foreach ($comment->children as $child) {
+            $child->update(['parent_id' => null]);
+        }
+        $comment->delete();
+        Session::flash('success', 'Comment deleted.');
+        return redirect(route('comments', $status));
     }
 }

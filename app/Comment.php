@@ -10,7 +10,7 @@ class Comment extends Model
 
     const STATUS_DRAFT = "Draft";
     const STATUS_APPROVED = "Approved";
-    const STATUS_DELETED = "Deleted";
+    const STATUS_DECLINED = "Declined";
 
     public function getPostAttribute() {
         return Post::find($this->post_id);

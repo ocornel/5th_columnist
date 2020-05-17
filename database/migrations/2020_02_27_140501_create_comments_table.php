@@ -21,7 +21,7 @@ class CreateCommentsTable extends Migration
             $table->bigInteger('likes')->default(0);
             $table->bigInteger('dislikes')->default(0);
             $table->float('rating')->default(0.0);
-            $table->enum('status', [\App\Comment::STATUS_DRAFT, \App\Comment::STATUS_APPROVED, \App\Comment::STATUS_DELETED])->default(\App\Comment::defaultCommentStatus());
+            $table->enum('status', [\App\Comment::STATUS_DRAFT, \App\Comment::STATUS_APPROVED, \App\Comment::STATUS_DECLINED])->default(\App\Comment::defaultCommentStatus());
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->timestamps();
 
